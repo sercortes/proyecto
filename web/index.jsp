@@ -15,8 +15,7 @@
                 <div class="col-md-4 mx-auto">
                     <div class="card text-center">
                         <div class="card-header">
-                            <h3><i class="fas fa-sign-in-alt"></i> Ir a SavProo</h3>
-                            <h1>hola</h1>
+                            <h3><i class="fas fa-sign-in-alt"></i> Ir a SavPro</h3>
                         </div>
                         <div class="card-body">
                             <img src="assets/img/Untitled.png" alt="" class="card-img-top mx-auto m-2 rounded-circle w-50">
