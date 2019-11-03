@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.sena.savpro.persist.dao;
-
+ 
 import co.edu.sena.savpro.persist.conection.Conexion;
 import co.edu.sena.savpro.persist.dto.Empresa;
 import co.edu.sena.savpro.persist.dto.Tamano;
@@ -13,8 +13,8 @@ import co.edu.sena.savpro.persist.dto.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,14 +30,16 @@ public class EmpresaDAO {
         this.conn = conn;
     }
 
-    public boolean insert(Empresa empresa) {
+    public int insert(Empresa empresa) {
 
+        int idEmpresa = 0;
+        
         String sql = "INSERT INTO empresa (razon_social, nit, direccion, telefono, sector_economico, "
-                + "descripcion, idtipo_Entidad, idtamano, paginaWeb, nombreEmpresa, idUsuario)  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                + "descripcion, idtipo_Entidad, idtamano, paginaWeb, nombreEmpresa)  VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         try {
 
-            PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+            PreparedStatement ps = conn.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, empresa.getRazonSocial());
             ps.setString(2, empresa.getNitEmpresa());
             ps.setString(3, empresa.getDirreccion());
@@ -48,14 +50,17 @@ public class EmpresaDAO {
             ps.setInt(8, empresa.getTamano().getIdTamano());
             ps.setString(9, empresa.getPaginaWeb());
             ps.setString(10, empresa.getNombreEmpresa());
-            ps.setInt(11, empresa.getUsuario().getIdUsuario());
             ps.executeUpdate();
-            return true;
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                idEmpresa = rs.getInt(1);
+            }
+            return idEmpresa;
 
         } catch (SQLException ex) {
-            System.out.println("sss "+ex.getMessage());
             this.error = ex.getMessage();
-            return false;
+            return 0;
         }
     }
 
@@ -64,7 +69,7 @@ public class EmpresaDAO {
         try {
             String sql = "UPDATE empresa set nombreEmpresa = ?, nit = ?, "
                     + "direccion  = ?, razon_social = ?, sector_economico = ?, "
-                    + "telefono = ?, paginaWeb = ?, descripcion = ?, idtipo_Entidad = ?, idtamano = ?, idUsuario = ?"
+                    + "telefono = ?, paginaWeb = ?, descripcion = ?, idtipo_Entidad = ?, idtamano = ? "
                     + " WHERE id = ?";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setString(1, empresa.getNombreEmpresa());
@@ -77,13 +82,11 @@ public class EmpresaDAO {
             ps.setString(8, empresa.getDescripcion());
             ps.setInt(9, empresa.getTipoEntidad().getTipoEntidad());
             ps.setInt(10, empresa.getTamano().getIdTamano());
-            ps.setInt(11, empresa.getUsuario().getIdUsuario());
-            ps.setInt(12, empresa.getIdEmpresa());
-            System.out.println(ps.toString());
+            ps.setInt(11, empresa.getIdEmpresa());
             int rows = ps.executeUpdate();
             return rows;
         } catch (Exception ex) {
-            System.out.println("Error EmpresaDAO.edit " + ex.getMessage());
+            System.out.println(ex.getMessage());;
             return 0;
         }
 
@@ -91,10 +94,12 @@ public class EmpresaDAO {
 
     public Empresa getById(int idEmpresa) {
         try {
-            String sql = "SELECT * FROM empresa e INNER JOIN tamano t ON e.idtamano=t.idtamano \n"
-                    + "INNER JOIN tipo_Entidad te ON e.idtipo_Entidad=te.idtipo_Entidad\n "
-                    + "INNER JOIN Usuario u ON e.idUsuario = u.id "
-                    + "WHERE e.id= ? limit 1";
+            String sql = "SELECT * FROM EmpresaUsuario eu \n"
+                    + "INNER JOIN Usuario u ON eu.codUsuario = u.id \n"
+                    + "INNER JOIN empresa e ON eu.codEmpresa = e.id \n"
+                    + "INNER JOIN tamano t ON e.idtamano = t.idtamano \n"
+                    + "INNER JOIN tipo_Entidad te ON e.idtipo_Entidad = te.idtipo_Entidad \n"
+                    + "WHERE e.id = ? limit 1";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setInt(1, idEmpresa);
             ResultSet rs = ps.executeQuery();
@@ -102,7 +107,7 @@ public class EmpresaDAO {
 
             while (rs.next()) {
                 empresa.setNombreEmpresa(rs.getString("nombreEmpresa"));
-                empresa.setIdEmpresa(rs.getInt("id"));
+                empresa.setIdEmpresa(rs.getInt("e.id"));
                 empresa.setRazonSocial(rs.getString("razon_social"));
                 empresa.setNitEmpresa(rs.getString("nit"));
                 empresa.setDirreccion(rs.getString("direccion"));
@@ -116,17 +121,19 @@ public class EmpresaDAO {
             }
             return empresa;
         } catch (SQLException e) {
-            System.out.println("error getById " + e.getMessage());
+            e.getMessage();
             return null;
         }
     }
 
     public List<Empresa> getByID(int id) {
         try {
-            String sql = "SELECT * FROM empresa e  INNER JOIN tamano t ON e.idtamano=t.idtamano \n"
-                    + "                         INNER JOIN tipo_Entidad te ON e.idtipo_Entidad=te.idtipo_Entidad\n"
-                    + "                         INNER JOIN Usuario u ON e.idUsuario = u.id\n"
-                    + "						 WHERE u.id = ?";
+            String sql = "SELECT * FROM EmpresaUsuario eu \n"
+                    + "INNER JOIN Usuario u ON eu.codUsuario=u.id \n"
+                    + "INNER JOIN empresa e ON eu.codEmpresa=e.id \n"
+                    + "INNER JOIN tamano t ON e.idtamano=t.idtamano \n"
+                    + "INNER JOIN tipo_Entidad te ON e.idtipo_Entidad=te.idtipo_Entidad \n"
+                    + "WHERE u.id = ?";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -135,7 +142,7 @@ public class EmpresaDAO {
             while (rs.next()) {
                 empresa = new Empresa();
                 empresa.setNombreEmpresa(rs.getString("nombreEmpresa"));
-                empresa.setIdEmpresa(rs.getInt("id"));
+                empresa.setIdEmpresa(rs.getInt("e.id"));
                 empresa.setRazonSocial(rs.getString("razon_social"));
                 empresa.setNitEmpresa(rs.getString("nit"));
                 empresa.setDirreccion(rs.getString("direccion"));
@@ -150,7 +157,7 @@ public class EmpresaDAO {
             }
             return list;
         } catch (Exception e) {
-            System.out.println("error getAll vacanteDao " + e.getMessage());
+            e.getMessage();
             return null;
         }
     }
