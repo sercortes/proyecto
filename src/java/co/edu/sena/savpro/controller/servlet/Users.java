@@ -12,6 +12,7 @@ import co.edu.sena.savpro.persist.dao.UsuarioDAO;
 import co.edu.sena.savpro.persist.dto.Empresa;
 import co.edu.sena.savpro.persist.dto.Perfil;
 import co.edu.sena.savpro.persist.dto.Usuario;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -63,8 +64,11 @@ public class Users extends HttpServlet {
                     }
                     
                     break;
-                case "/SavPro/AddUser":
+                    case "/SavPro/AddUser":
                     loadForm(request, response);
+                    break;
+                case "/SavPro/ListUsers":
+                    redirectUsers(request, response);
                     break;
                 case "/SavPro/DelUser":
                     delete(request, response);
@@ -109,32 +113,33 @@ public class Users extends HttpServlet {
         
         UsuarioDAO usuariodao = new UsuarioDAO(conn);
         Usuario user = usuariodao.getByID(id);
-        
-        String idPerfil = String.valueOf(user.getPerfil());
-        
+       
         PerfilDAO perfildao = new PerfilDAO(conn);
-        Object perfil = perfildao.getByID(idPerfil);
         
-        List<?> perfiles = perfildao.getAll();
+        user.setLista(perfildao.getAll());
         conn.disconnectDb();
         
+        response.setContentType("application/json");
+      new Gson().toJson(user, response.getWriter());
         
-        request.setAttribute("PERFILES", perfiles);
         
-        request.setAttribute("USUARIO", user);
-        request.setAttribute("PERFIL", perfil);
-        RequestDispatcher rd;
+//        request.setAttribute("PERFILES", perfiles);
+//        
+//        request.setAttribute("USUARIO", user);
+//        request.setAttribute("PERFIL", perfil);
+        
+//        RequestDispatcher rd;
 
 
-        if (user != null) {
-            rd = request.getRequestDispatcher("/views/users/editUser.jsp");
-        } else {
-            request.getSession().setAttribute("MSG", 0);
-            request.getSession().setAttribute("URL", "/SavPro/Users");
-            rd = request.getRequestDispatcher("/views/company/message.jsp");
-        }
-       
-        rd.forward(request, response);
+//        if (user != null) {
+//            rd = request.getRequestDispatcher("/views/users/editUser.jsp");
+//        } else {
+//            request.getSession().setAttribute("MSG", 0);
+//            request.getSession().setAttribute("URL", "/SavPro/Users");
+//            rd = request.getRequestDispatcher("/views/company/message.jsp");
+//        }
+//       
+//        rd.forward(request, response);
 
     }
     
@@ -142,52 +147,51 @@ public class Users extends HttpServlet {
             throws ServletException, IOException {
 
         String id = request.getParameter("id");
-
-      
+        
         Conexion conn = new Conexion();
         UsuarioDAO usuariodao = new UsuarioDAO(conn);
         
-        int operacion = 0;
+         String json = "";
         if (usuariodao.delete(id)) {
-            operacion = 1;
+            json = new Gson().toJson("ok");
+            response.getWriter().write(json);      
         } else {
-            operacion = 0;
+            json = new Gson().toJson("no");
+            response.getWriter().write(json);
         }
         
-        request.getSession().setAttribute("MSG", operacion);
-        request.getSession().setAttribute("URL", "/SavPro/Users");
-        conn.disconnectDb();
         
-        response.sendRedirect("/SavPro/Message");
 
     }
     
     public void insert(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        admin.setContentType(request);
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
         
         Conexion conn = new Conexion();
-        String nombre = request.getParameter("nombre");
+        String nombre = request.getParameter("name");
+        String apellido = request.getParameter("ape");
         String email = request.getParameter("email");
-        String nameuser = request.getParameter("nameuser");
-        String pass = request.getParameter("pass");
+        String pass = request.getParameter("password");
         String perfil = request.getParameter("perfil");
         String estado = request.getParameter("estado");
         
-        Usuario usuario = new Usuario(nombre, email, estado, pass, Integer.parseInt(perfil), estado);
+        Usuario usuario = new Usuario(nombre, email, apellido, pass, Integer.parseInt(perfil), estado);
+       
         UsuarioDAO usuariodao = new UsuarioDAO(conn);
-        int operacion = 0;
+        
+        String json = "";
         if (usuariodao.insert(usuario)) {
-            operacion = 1;
-        }else{
-            operacion = 0;
+            json = new Gson().toJson("ok");
+            response.getWriter().write(json);      
+        } else {
+            json = new Gson().toJson("no");
+            response.getWriter().write(json);     
+
         }
         
-        request.getSession().setAttribute("MSG", operacion);
-        request.getSession().setAttribute("URL", "/SavPro/Users");
-        conn.disconnectDb();
-        
-        response.sendRedirect("/SavPro/Message");
+
 
     }
     
@@ -201,27 +205,41 @@ public class Users extends HttpServlet {
         List<?> perfiles = perfildao.getAll();
         conn.disconnectDb();
         
-        request.setAttribute("PERFILES", perfiles);
-
-        rd = request.getRequestDispatcher("/views/users/addUser.jsp");
-        rd.forward(request, response);
+      response.setContentType("application/json");
+      new Gson().toJson(perfiles, response.getWriter());
+      
 
     }
     
-    public void mostrarUsers(HttpServletRequest request, HttpServletResponse response)
+    public void redirectUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         Conexion conn = new Conexion();
         UsuarioDAO usuarioDAO = new UsuarioDAO(conn);
         List<?> usuarios = usuarioDAO.getAll();
-        
-        request.setAttribute("USUARIOS", usuarios);
-        
-        RequestDispatcher dis = request.getRequestDispatcher("/views/users/Users.jsp");
-        
         conn.disconnectDb();
-        dis.forward(request, response);
         
+        
+       response.setContentType("application/json");
+      new Gson().toJson(usuarios, response.getWriter());
+           
+      
+    }
+    
+    
+    
+    public void mostrarUsers(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+         RequestDispatcher dis = request.getRequestDispatcher("/views/users/Users.jsp");
+        
+        
+        dis.forward(request, response);
+      
+        
+        
+      
+      
     }
     
     
@@ -230,30 +248,28 @@ public class Users extends HttpServlet {
         admin.setContentType(request);
         
         int id = Integer.parseInt(request.getParameter("id"));
-        String nombre = request.getParameter("nombre");
+        String nombre = request.getParameter("name");
+        String apellido = request.getParameter("ape");
         String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        String estado = request.getParameter("estado");
         String perfil = request.getParameter("perfil");
-    
-        Object user = new Usuario(id, nombre, email, username, Integer.parseInt(perfil), estado);
+        String estado = request.getParameter("estado");
+        Object user = new Usuario(id, nombre, email, apellido, Integer.parseInt(perfil), estado);
         
         Conexion conn = new Conexion();
         UsuarioDAO usuariodao = new UsuarioDAO(conn);
         
-        int operacion = 0;
-        if (usuariodao.update(user)) {
-            operacion = 1;
-        }else{
-            operacion = 0;
-        }
         
-        request.getSession().setAttribute("MSG", operacion);
-        request.getSession().setAttribute("URL", "/SavPro/Users");
+        String json = "";
+        if (usuariodao.update(user)) {
+            json = new Gson().toJson("ok");
+            response.getWriter().write(json);      
+        } else {
+            json = new Gson().toJson("no");
+            response.getWriter().write(json);
+        }
+
         conn.disconnectDb();
         
-        response.sendRedirect("/SavPro/Message");
-
     }
 
     /**
