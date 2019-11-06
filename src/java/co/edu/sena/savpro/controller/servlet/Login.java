@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
         UsuarioDAO userdao = new UsuarioDAO(conn);
 
         Usuario usuario = userdao.login(userParam, passParam);
-        
+    
         conn.disconnectDb();
         
         if (usuario.getIdUsuario() > 0) {

@@ -1,0 +1,80 @@
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user"></i> Nuevo usuarioo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario" onsubmit="myFunction()" class="needs-validation" novalidate>
+                    <div class="form-row">
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Nombre:</label>
+                            <input name="nombre" type="text" class="form-control" id="nombre" maxlength="30" placeholder="Pepito" required>
+                            <div class="valid-feedback">
+                                Correcto
+                            </div>
+                            <div class="invalid-feedback">
+                                Ingrese un nombre válido
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Apellido:</label>
+                            <input name="apellido" type="text" class="form-control" id="apellido" maxlength="30" required>
+                            <div class="valid-feedback">
+                                Correcto
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Email:</label>
+                            <input name="email" type="text" class="form-control" id="email" maxlength="50" required>
+                            <div class="valid-feedback">
+                                Correcto
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom04">Contraseña:</label>
+                            <input name="pass" type="password" class="form-control" id="password" maxlength="50" placeholder="*****" required>
+                            <div class="valid-feedback">
+                                Correcto
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        
+
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom04">Estado:</label>
+                            <input name="estado" type="text" class="form-control" id="estado" maxlength="30" value="ok" required>
+                            <div class="valid-feedback">
+                                Correcto
+                            </div>
+                            <div class="invalid-feedback">
+                                Ingrese un estado válido
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-window-close"></i> Cerrar</button>
+                        <button id="save" class="btn btn-success float-right" type="submit"><i class="fas fa-paper-plane"></i> Guardar</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -5,6 +5,8 @@
  */
 package co.edu.sena.savpro.persist.dto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author smart
@@ -13,8 +15,8 @@ public class Usuario {
     
     private int idUsuario;
     private String nombre;
+    private String apellido;
     private String email;
-    private String userName;
     private String password;
     private int perfil;
     private String estado;
@@ -23,6 +25,8 @@ public class Usuario {
     private Empresa empresa;
 
     private Perfil perfilUsuario;
+    
+    private ArrayList<?> lista;
     
     public Usuario() {
     }
@@ -35,13 +39,23 @@ public class Usuario {
         this.idUsuario = idUsuario;
         this.email = email;
     }
+
+    
+    
+    public Usuario(int idUsuario, String nombre, String password, String estado) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.password = password;
+        this.estado = estado;
+    }
+    
     
 
-    public Usuario(int idUsuario, String nombre, String email, String userName, String password, int perfil, String estado, int idEmpresa, Empresa empresa, Perfil perfilUsuario) {
+    public Usuario(int idUsuario, String nombre, String email, String apellido, String password, int perfil, String estado, int idEmpresa, Empresa empresa, Perfil perfilUsuario) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
-        this.userName = userName;
+        this.apellido = apellido;
         this.password = password;
         this.perfil = perfil;
         this.estado = estado;
@@ -50,10 +64,10 @@ public class Usuario {
         this.perfilUsuario = perfilUsuario;
     }
 
-    public Usuario(String nombre, String email, String userName, String password, int perfil, String estado) {
+    public Usuario(String nombre, String email, String apellido, String password, int perfil, String estado) {
         this.nombre = nombre;
         this.email = email;
-        this.userName = userName;
+        this.apellido = apellido;
         this.password = password;
         this.perfil = perfil;
         this.estado = estado;
@@ -63,16 +77,16 @@ public class Usuario {
    
     
 
-    public Usuario(String userName, String password) {
-        this.userName = userName;
+    public Usuario(String apellido, String password) {
+        this.apellido = apellido;
         this.password = password;
     }
 
-    public Usuario(int idUsuario, String nombre, String email, String userName, int perfil, String estado) {
+    public Usuario(int idUsuario, String nombre, String email, String apellido, int perfil, String estado) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
-        this.userName = userName;
+        this.apellido = apellido;
         this.perfil = perfil;
         this.estado = estado;
     }
@@ -101,12 +115,12 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getPassword() {
@@ -143,7 +157,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", email=" + email + ", userName=" + userName + ", password=" + password + ", perfil=" + perfil + ", estado=" + estado + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", email=" + email + ", apellido=" + apellido + ", password=" + password + ", perfil=" + perfil + ", estado=" + estado + '}';
     }
 
     
@@ -164,6 +178,16 @@ public class Usuario {
     public void setPerfilUsuario(Perfil perfilUsuario) {
         this.perfilUsuario = perfilUsuario;
     }
+
+    public ArrayList<?> getLista() {
+        return lista;
+    }
+
+    public void setLista(ArrayList<?> lista) {
+        this.lista = lista;
+    }
    
+    
+    
     
 }

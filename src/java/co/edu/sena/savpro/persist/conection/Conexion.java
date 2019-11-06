@@ -20,9 +20,7 @@ public class Conexion {
            Class.forName("com.mysql.jdbc.Driver");
            conn = DriverManager.getConnection(url, user, pass);
            
-           if (conn != null) {
-               System.out.println("Conectado");
-           }
+         
            
        }catch(SQLException e){
            e.getMessage();
@@ -37,13 +35,12 @@ public class Conexion {
     }
     
     public void disconnectDb(){
-        System.out.println("Closing database");
         
         if (conn != null) {
             try{
                conn.close();
             }catch(SQLException e){
-                System.out.println("Error al cerrar la conexion "+e.getMessage());
+                e.getMessage();
             }
         }
         

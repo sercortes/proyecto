@@ -7,6 +7,7 @@ package co.edu.sena.savpro.controller.servlet;
 
 import co.edu.sena.savpro.persist.conection.Conexion;
 import co.edu.sena.savpro.persist.dao.EmpresaDAO;
+import co.edu.sena.savpro.persist.dao.EmpresaUsuarioDAO;
 import co.edu.sena.savpro.persist.dao.PerfilDAO;
 import co.edu.sena.savpro.persist.dao.UsuarioDAO;
 import co.edu.sena.savpro.persist.dto.Empresa;
@@ -31,15 +32,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Users extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -122,24 +115,6 @@ public class Users extends HttpServlet {
         response.setContentType("application/json");
       new Gson().toJson(user, response.getWriter());
         
-        
-//        request.setAttribute("PERFILES", perfiles);
-//        
-//        request.setAttribute("USUARIO", user);
-//        request.setAttribute("PERFIL", perfil);
-        
-//        RequestDispatcher rd;
-
-
-//        if (user != null) {
-//            rd = request.getRequestDispatcher("/views/users/editUser.jsp");
-//        } else {
-//            request.getSession().setAttribute("MSG", 0);
-//            request.getSession().setAttribute("URL", "/SavPro/Users");
-//            rd = request.getRequestDispatcher("/views/company/message.jsp");
-//        }
-//       
-//        rd.forward(request, response);
 
     }
     
@@ -166,6 +141,8 @@ public class Users extends HttpServlet {
     
     public void insert(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         
@@ -181,8 +158,22 @@ public class Users extends HttpServlet {
        
         UsuarioDAO usuariodao = new UsuarioDAO(conn);
         
+      Usuario usuarios = (Usuario) session.getAttribute("USER");
+        
+        boolean operacion = false;
+        
+        if (usuarios.getPerfil() == 1) {
+            operacion = usuariodao.insert(usuario);
+        }else{
+            int idUsuario = usuariodao.insert1(usuario);
+            int idEmpresa = Integer.parseInt(request.getParameter("id"));
+            
+            EmpresaUsuarioDAO empresa = new EmpresaUsuarioDAO(conn);
+            operacion = empresa.insert(idEmpresa, idUsuario);
+        }
+        
         String json = "";
-        if (usuariodao.insert(usuario)) {
+        if (operacion) {
             json = new Gson().toJson("ok");
             response.getWriter().write(json);      
         } else {

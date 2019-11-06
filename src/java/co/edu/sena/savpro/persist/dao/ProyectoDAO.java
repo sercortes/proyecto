@@ -27,14 +27,14 @@ public class ProyectoDAO {
     public ProyectoDAO(Conexion conn) {
         this.conn = conn;
     }
-    
-    public boolean insert(Proyecto proyecto){
-        
-            String sql = "INSERT INTO proyecto (nombre, copartida_sena, empresa_id, interventor_id, descripcion, objetivos) \n" +
-"             VALUES (?, ?, ?, ?, ?, ?)";
-        
+
+    public boolean insert(Proyecto proyecto) {
+
+        String sql = "INSERT INTO proyecto (nombre, copartida_sena, empresa_id, interventor_id, descripcion, objetivos) \n"
+                + "             VALUES (?, ?, ?, ?, ?, ?)";
+
         try {
-            
+
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setString(1, proyecto.getNombre());
             ps.setString(2, proyecto.getCopartidaSena());
@@ -44,22 +44,21 @@ public class ProyectoDAO {
             ps.setString(6, proyecto.getObjetivos());
             ps.executeUpdate();
             return true;
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             this.error = ex.getMessage();
             return false;
         }
     }
-    
+
     public int updateEmpresa(Proyecto proyecto) throws Exception {
-		
-		
-         try{
-              String sql = "UPDATE proyecto set nombre = ?, copartida_sena = ?, empresa_id = ?,"
-                      + "interventor_id = ?, descripcion = ?, objetivos = ? WHERE idProyecto = ?";
-              PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-              
+
+        try {
+            String sql = "UPDATE proyecto set nombre = ?, copartida_sena = ?, empresa_id = ?,"
+                    + "interventor_id = ?, descripcion = ?, objetivos = ? WHERE idProyecto = ?";
+            PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+
             ps.setString(1, proyecto.getNombre());
             ps.setString(2, proyecto.getCopartidaSena());
             ps.setInt(3, proyecto.getEmpresa().getIdEmpresa());
@@ -67,83 +66,91 @@ public class ProyectoDAO {
             ps.setString(5, proyecto.getDescripcion());
             ps.setString(6, proyecto.getObjetivos());
             ps.setInt(7, proyecto.getIdProyecto());
-            
-              int rows = ps.executeUpdate();
-              return rows;
-          }catch(Exception ex){
-              System.out.println("Error EmpresaDAO.edit "+ex.getMessage());
-              return 0;
-          }
-	
-	}
-    
-    public Proyecto getById(int idProject){
-        try{
-            String sql = "SELECT * FROM proyecto p INNER JOIN empresa e ON p.empresa_id = e.id\n" +
-"                         INNER JOIN interventor i ON p.interventor_id = i.idInterventor\n" +
-"						 WHERE p.idProyecto = ? LIMIT 1";
+
+            int rows = ps.executeUpdate();
+            return rows;
+        } catch (Exception ex) {
+            System.out.println("Error EmpresaDAO.edit " + ex.getMessage());
+            return 0;
+        }
+
+    }
+
+    public Proyecto getById(int idProject) {
+        try {
+            String sql = "SELECT * FROM EmpresaUsuario eu \n"
+                    + "	INNER JOIN Usuario u ON eu.codUsuario=u.id \n"
+                    + "	INNER JOIN empresa e ON eu.codEmpresa=e.id \n"
+                    + "	INNER JOIN tamano t ON e.idtamano=t.idtamano \n"
+                    + "	INNER JOIN tipo_Entidad te ON e.idtipo_Entidad=te.idtipo_Entidad \n"
+                    + "	INNER JOIN proyecto p ON e.id=p.empresa_id \n"
+                    + " INNER JOIN interventor i ON p.interventor_id=i.idInterventor "
+                    + " WHERE p.idProyecto = ? LIMIT 1";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setInt(1, idProject);
             ResultSet rs = ps.executeQuery();
             Proyecto proyecto = new Proyecto();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 proyecto = new Proyecto();
-                proyecto.setNombre(rs.getString("nombre"));
+                proyecto.setNombre(rs.getString("p.nombre"));
                 proyecto.setIdProyecto(rs.getInt("idProyecto"));
                 proyecto.setCopartidaSena(rs.getString("copartida_sena"));
-                proyecto.setEmpresa(new Empresa(rs.getInt("empresa_id"), rs.getString("nombreEmpresa")));
-                proyecto.setInterventor(new Interventor(rs.getInt("interventor_id"), rs.getString("nombres")));
+                proyecto.setEmpresa(new Empresa(rs.getInt("e.id"), rs.getString("e.nombreEmpresa")));
+                proyecto.setInterventor(new Interventor(rs.getInt("interventor_id"), rs.getString("nombre")));
                 proyecto.setDescripcion(rs.getString("descripcion"));
-                proyecto.setObjetivos(rs.getString("objetivos"));    
+                proyecto.setObjetivos(rs.getString("objetivos"));
             }
             return proyecto;
-        }catch(SQLException e){
-            System.out.println("error getById "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("error getById " + e.getMessage());
             return null;
         }
     }
-    
-    public List<Proyecto> getByID(int id){
-        try{
-            String sql = "SELECT * FROM proyecto p " +
-                         "INNER JOIN empresa e ON p.empresa_id = e.id " +
-                         "INNER JOIN interventor i ON p.interventor_id = i.idInterventor " +
-                         "WHERE e.idUsuario = ? LIMIT 10";
+
+    public List<Proyecto> getByID(int id) {
+        try {
+            String sql = "SELECT * FROM EmpresaUsuario eu \n"
+                    + "	INNER JOIN Usuario u ON eu.codUsuario=u.id \n"
+                    + "	INNER JOIN empresa e ON eu.codEmpresa=e.id \n"
+                    + "	INNER JOIN tamano t ON e.idtamano=t.idtamano \n"
+                    + "	INNER JOIN tipo_Entidad te ON e.idtipo_Entidad=te.idtipo_Entidad \n"
+                    + "	INNER JOIN proyecto p ON e.id=p.empresa_id \n"
+                    + " INNER JOIN interventor i ON p.interventor_id=i.idInterventor WHERE u.id = ? LIMIT 10";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             List<Proyecto> list = new ArrayList<>();
             Proyecto proyecto;
-            while(rs.next()){
+            while (rs.next()) {
                 proyecto = new Proyecto();
-                proyecto.setNombre(rs.getString("nombre"));
+                proyecto.setNombre(rs.getString("p.nombre"));
                 proyecto.setIdProyecto(rs.getInt("idProyecto"));
                 proyecto.setCopartidaSena(rs.getString("copartida_sena"));
                 proyecto.setEmpresa(new Empresa(rs.getInt("empresa_id"), rs.getString("nombreEmpresa")));
                 proyecto.setDescripcion(rs.getString("descripcion"));
-                proyecto.setObjetivos(rs.getString("objetivos"));   
+                proyecto.setObjetivos(rs.getString("objetivos"));
                 proyecto.setInterventor(new Interventor(rs.getInt("interventor_id"), rs.getString("nombres")));
-                
+
                 list.add(proyecto);
             }
             return list;
-        }catch(Exception e){
-            System.out.println("error getAll vacanteDao "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("error getAll vacanteDao " + e.getMessage());
             return null;
         }
     }
-    
-    public List<Proyecto> getAll(){
-        try{
-            String sql = "SELECT * FROM proyecto p INNER JOIN empresa e ON p.empresa_id = e.id\n" +
-"                         INNER JOIN interventor i ON p.interventor_id = i.idInterventor\n" +
-"						 LIMIT 10";
+
+    public List<Proyecto> getAll() {
+        try {
+            String sql = "SELECT * FROM proyecto p INNER JOIN empresa e ON p.empresa_id = e.id\n"
+                    + "                         INNER JOIN interventor i ON p.interventor_id = i.idInterventor\n"
+                    + "						 LIMIT 10";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Proyecto> list = new ArrayList<>();
             Proyecto proyecto;
-            while(rs.next()){
+            while (rs.next()) {
                 proyecto = new Proyecto();
                 proyecto.setNombre(rs.getString("nombre"));
                 proyecto.setIdProyecto(rs.getInt("idProyecto"));
@@ -151,29 +158,29 @@ public class ProyectoDAO {
                 proyecto.setEmpresa(new Empresa(rs.getInt("empresa_id"), rs.getString("nombreEmpresa")));
                 proyecto.setInterventor(new Interventor(rs.getInt("interventor_id"), rs.getString("nombres")));
                 proyecto.setDescripcion(rs.getString("descripcion"));
-                proyecto.setObjetivos(rs.getString("objetivos"));    
-                
+                proyecto.setObjetivos(rs.getString("objetivos"));
+
                 list.add(proyecto);
             }
             return list;
-        }catch(Exception e){
-            System.out.println("error getAll vacanteDao "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("error getAll vacanteDao " + e.getMessage());
             return null;
         }
     }
-    
-    public int delete(int idEmpresa){
-          try{
-              String sql = "DELETE FROM proyecto WHERE idProyecto = ?";
-              PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-              ps.setInt(1, idEmpresa);
-              int rows = ps.executeUpdate();
-              return rows;
-          }catch(Exception ex){
-              System.out.println("Error "+ex.getMessage());
-              return 0;
-          }
-      }
+
+    public int delete(int idEmpresa) {
+        try {
+            String sql = "DELETE FROM proyecto WHERE idProyecto = ?";
+            PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+            ps.setInt(1, idEmpresa);
+            int rows = ps.executeUpdate();
+            return rows;
+        } catch (Exception ex) {
+            System.out.println("Error " + ex.getMessage());
+            return 0;
+        }
+    }
 
     public String getError() {
         return error;
@@ -182,6 +189,5 @@ public class ProyectoDAO {
     public void setError(String error) {
         this.error = error;
     }
-    
-    
+
 }

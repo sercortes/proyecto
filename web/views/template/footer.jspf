@@ -1,0 +1,29 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+   </div>
+   <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span class="letrablanca">Sergio Cortes <sup>R</sup></span>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+
+        </div>
+
+    
+        
+        <script src="assets/js/jquery/jquery.min.js"></script>
+
+        <script src="assets/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="assets/js/sb-admin-2.min.js"></script>
+        
+        <script src="assets/js/alertify/alertify.js"></script>
+
+        
+    </body>
+
+</html>

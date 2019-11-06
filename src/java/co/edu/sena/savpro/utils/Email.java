@@ -78,7 +78,7 @@ public class Email {
             message.setContent("<h3>"+mensaje+"</h3>", "text/html");
 
             Transport.send(message);
-            System.out.println("Mail sent successfully");
+            
             return true;
         } catch (MessagingException me)
         {

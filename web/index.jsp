@@ -73,5 +73,5 @@
         </div>
     </div>
 
-</body><script src="assets/js/validation.js"></script>
+</body><script src="assets/js/validation_1.js"></script>
 

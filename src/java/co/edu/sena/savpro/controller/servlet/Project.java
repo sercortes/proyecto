@@ -121,6 +121,8 @@ public class Project extends HttpServlet {
 
         Proyecto proyecto = new Proyecto(nombre, coSena, empresa.getIdEmpresa(), interventor.getIdInterventor(),
                 descr, obje, empresa, interventor);
+        
+        System.out.println(proyecto.toString());
 
         ProyectoDAO proyectoDAO = new ProyectoDAO(conn);
 

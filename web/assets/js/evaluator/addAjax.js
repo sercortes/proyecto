@@ -47,11 +47,11 @@ function listar() {
                                                     <td>${item.perfilUsuario.nombre}</td>
                                                     <td>${item.estado}</td>
                                                     <td>
-                                                        <button class="btn btn-success btn-xs" role="button" onclick = "editar(${item.idUsuario})">
+                                                        <button class="btn btn-success btn-xs" role="button" title="Editar" onclick = "editar(${item.idUsuario})">
                                                             <i class="far fa-edit"></i>
                                                         </button>
                                                         
-                                                      <button class="btn btn-danger btn-xs" role="button" onclick = "eliminar(${item.idUsuario})" >
+                                                      <button class="btn btn-danger btn-xs" role="button" title="Eliminar"  onclick = "eliminar(${item.idUsuario})" >
                                                             <i class="far fa-trash-alt"></i> 
                                                         </button>           
                                                 </td>

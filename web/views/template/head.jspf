@@ -1,0 +1,29 @@
+<%
+
+    response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    response.setHeader("Pragma", "no-cache"); 
+    response.setDateHeader("Expires", 0); 
+
+%>
+
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" type="image/png" href="assets/img/Untitled.png"/>
+        <link href="assets/fonts/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/css/estilos.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/alertify.css">
+
+        <title>Sav pro</title>
+
+    </head>
+

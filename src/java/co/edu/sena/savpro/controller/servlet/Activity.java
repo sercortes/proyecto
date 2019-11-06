@@ -14,9 +14,14 @@ import co.edu.sena.savpro.persist.dao.UsuarioDAO;
 import co.edu.sena.savpro.persist.dto.ActividadFormacionAprendiz;
 import co.edu.sena.savpro.persist.dto.ActividadesFormacion;
 import co.edu.sena.savpro.persist.dto.Evaluador;
+import co.edu.sena.savpro.persist.dto.Evaluador1;
 import co.edu.sena.savpro.persist.dto.Proyecto;
 import co.edu.sena.savpro.persist.dto.Usuario;
 import co.edu.sena.savpro.utils.Email;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import java.awt.Event;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,12 +93,10 @@ public class Activity extends HttpServlet {
 
         String id = request.getParameter("id");
         Conexion conn = new Conexion();
-        
+
         ActividadFormacionDAO actividadDao = new ActividadFormacionDAO(conn);
         Object actividad = actividadDao.getByID(id);
-   
-        
-        
+
         request.setAttribute("ACTIVIDAD", actividad);
         RequestDispatcher rd;
 
@@ -104,11 +107,11 @@ public class Activity extends HttpServlet {
             request.getSession().setAttribute("URL", "/SavPro/Users");
             rd = request.getRequestDispatcher("/views/home/message.jsp");
         }
-       
+
         rd.forward(request, response);
 
     }
-    
+
     public void mostrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -127,23 +130,23 @@ public class Activity extends HttpServlet {
 
         RequestDispatcher dis = request.getRequestDispatcher("/views/Activity/activity.jsp");
 
-        request.getSession().setAttribute("URL", request.getRequestURI()+"?id="+id);
-        
+        request.getSession().setAttribute("URL", request.getRequestURI() + "?id=" + id);
+
         conn.disconnectDb();
         dis.forward(request, response);
 
     }
-    
+
     public void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         admin.setContentType(request);
-        
+
         String id = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String sesiones = request.getParameter("sesiones");
         String fechaInicio = request.getParameter("fechaInicio");
         String fechaFin = request.getParameter("fechaFin");
-        
+
         ActividadesFormacion actividad = new ActividadesFormacion(
                 Integer.parseInt(id),
                 nombre,
@@ -151,9 +154,9 @@ public class Activity extends HttpServlet {
                 fechaFin,
                 Integer.parseInt(sesiones)
         );
-        
-       Conexion conn = new Conexion();
-       ActividadFormacionDAO actividadDAO = new ActividadFormacionDAO(conn);
+
+        Conexion conn = new Conexion();
+        ActividadFormacionDAO actividadDAO = new ActividadFormacionDAO(conn);
         int operacion = 0;
         if (actividadDAO.update(actividad)) {
             operacion = 1;
@@ -163,82 +166,91 @@ public class Activity extends HttpServlet {
         request.getSession().setAttribute("MSG", operacion);
         response.sendRedirect("/SavPro/Message");
         conn.disconnectDb();
-        
-        
+
     }
 
     public void newActivity(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         admin.setContentType(request);
-        
+        response.setContentType("application/json");
+
+        // atributos de la actividad de formación
         String id = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String sesiones = request.getParameter("sesiones");
         String fechaInicio = request.getParameter("fechaInicio");
         String fechaFin = request.getParameter("fechaFin");
-        ActividadesFormacion actividad = new ActividadesFormacion
-        (nombre, fechaInicio, fechaFin, 
-         Integer.parseInt(sesiones), 
+
+        ActividadesFormacion actividad = new ActividadesFormacion(nombre, fechaInicio, fechaFin,
+                Integer.parseInt(sesiones),
                 Integer.parseInt(id));
         actividad.setProyecto(new Proyecto(Integer.parseInt(id)));
 
+        // llegada del arreglo JSON
+        String[] arreglo = request.getParameterValues("arrayEvaluadores");
+        String json = "";
+        for (String item : arreglo) {
+            json += item;
+        }
+        Gson gson = new Gson();
+        Evaluador1[] evaluador = gson.fromJson(json, Evaluador1[].class);
+
+        // instancia de la bd y los dao para insertar
         Conexion conn = new Conexion();
         ActividadFormacionDAO actividadDAO = new ActividadFormacionDAO(conn);
-        int idActividadFormacion = actividadDAO.insert1(actividad);  
-        
-        String nameEvaluador = request.getParameter("nameEvaluador");
-        String correoEvaluador = request.getParameter("correoEvaluador");
-        String estadoEva = "no";
-        UsuarioDAO usuariodao = new UsuarioDAO(conn);
-        String password = usuariodao.generatePassword();
-        Usuario user =  new Usuario(nameEvaluador, correoEvaluador, nameEvaluador, password, 3, estadoEva);
-        
-        Email email = new Email();
-        String mensaje = email.mensajeCorreo(nameEvaluador, correoEvaluador, password);
-        email.sendEmail(correoEvaluador, mensaje);
-        
-        String prograEvaluador = request.getParameter("prograEvaluador");
-        String tipoEvaluador = request.getParameter("tipoEvaluador");
-        String apeEvaluador = request.getParameter("apeEvaluador");
-        
-       int idUsuario = usuariodao.insert1(user);
-        
-        Evaluador evaluador = new Evaluador(nameEvaluador, apeEvaluador, 
-                prograEvaluador, correoEvaluador, 
-                Integer.parseInt(tipoEvaluador), 
-                idUsuario); 
-        EvaluadorDAO evaluadordao = new EvaluadorDAO(conn);
-        int idEvaluador = evaluadordao.insert1(evaluador);
-        
         ActividadFormacionAprendizDAO actividadadao = new ActividadFormacionAprendizDAO(conn);
-        ActividadFormacionAprendiz aprendizac = new ActividadFormacionAprendiz(idActividadFormacion, idEvaluador);
-        boolean ope = actividadadao.insert(aprendizac);
-        
-        int operacion = 0;
-        
-        if (idUsuario != 0 && idEvaluador != 0 && idActividadFormacion !=0 && ope!=false) {
-            operacion = 1;
-        }else{
-            operacion = 0;
+        UsuarioDAO usuariodao = new UsuarioDAO(conn);
+
+        int idActividadFormacion = actividadDAO.insert1(actividad);
+        boolean bandera = true;
+
+        Email email = new Email();
+        for (Evaluador1 item : evaluador) {
+
+            ActividadFormacionAprendiz aprendizac
+                    = new ActividadFormacionAprendiz(idActividadFormacion, item.getId());
+
+            if (!actividadadao.insert(aprendizac)) {
+                bandera = false;
+            }
+
+            String password = usuariodao.generatePassword();
+            Usuario user = new Usuario(item.getId(), item.getNombre(), password, "activo");
+
+            if (!usuariodao.updateEvaluador(user)) {
+                bandera = false;
+            }
+
+            user.setEmail(usuariodao.getEmail(item.getId()));
+            String mensaje = email.mensajeCorreo(user.getNombre(), user.getEmail(), password);
+
+            if (!email.sendEmail(user.getEmail(), mensaje)) {
+                bandera = false;
+            }
         }
+
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
         
-        request.getSession().setAttribute("MSG", operacion);
-        request.getSession().setAttribute("URL", "/SavPro/Activitys?id=" + id);
-        conn.disconnectDb();
-        
-        response.sendRedirect("/SavPro/Message");
-        
+        String res = "";
+        if (idActividadFormacion != 0 && bandera) {
+            json = new Gson().toJson("ok");
+            response.getWriter().write(res);
+        } else {
+            json = new Gson().toJson("no");
+            response.getWriter().write(res);
+        }
 
     }
 
     public void formAdd(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Conexion conn = new Conexion();
-        TipoEvaluadorDAO tipodao = new TipoEvaluadorDAO(conn);
-        ArrayList<?> lista  = tipodao.getAll();
-        
-        request.setAttribute("TIPO", lista);
-        
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO(conn);
+        ArrayList<?> lista = usuarioDAO.getEvaluadoresAll();
+        request.setAttribute("EVALUADORES", lista);
+
         RequestDispatcher rd;
         rd = request.getRequestDispatcher("/views/Activity/addActivity.jsp");
         rd.forward(request, response);
@@ -254,7 +266,7 @@ public class Activity extends HttpServlet {
         String id = request.getParameter("id");
         Conexion conn = new Conexion();
         ActividadFormacionDAO actividadDAO = new ActividadFormacionDAO(conn);
-      
+
         int operacion = 0;
         if (actividadDAO.delete(Integer.parseInt(id))) {
             operacion = 1;
@@ -262,7 +274,7 @@ public class Activity extends HttpServlet {
             operacion = 0;
         }
         request.getSession().setAttribute("MSG", operacion);
-        request.getSession().setAttribute("URL", "/SavPro/Activitys?id="+ids);
+        request.getSession().setAttribute("URL", "/SavPro/Activitys?id=" + ids);
         response.sendRedirect("/SavPro/Message");
         conn.disconnectDb();
     }

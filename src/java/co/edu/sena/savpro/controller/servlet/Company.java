@@ -7,6 +7,7 @@ package co.edu.sena.savpro.controller.servlet;
 
 import co.edu.sena.savpro.persist.conection.Conexion;
 import co.edu.sena.savpro.persist.dao.EmpresaDAO;
+import co.edu.sena.savpro.persist.dao.EmpresaUsuarioDAO;
 import co.edu.sena.savpro.persist.dao.TamanoDAO;
 import co.edu.sena.savpro.persist.dao.TipoEntidadDAO;
 import co.edu.sena.savpro.persist.dao.UsuarioDAO;
@@ -124,8 +125,13 @@ public class Company extends HttpServlet {
         Conexion conn = new Conexion();
         EmpresaDAO empresadao = new EmpresaDAO(conn);
         
+        int idEmpresa = empresadao.insert(empresa);
+        
+        EmpresaUsuarioDAO empresaUsuDao = new EmpresaUsuarioDAO(conn);
+        
         int operacion = 0;
-        if (empresadao.insert(empresa)) {
+        
+        if (empresaUsuDao.insert(idEmpresa, idUsuario)) {
             operacion = 1;
         }else{
             operacion = 0;
@@ -158,6 +164,8 @@ public class Company extends HttpServlet {
         TipoEntidad tipoEntidad = new TipoEntidad(Integer.parseInt(tipo));
         String idUsu = request.getParameter("usuario");
 
+        System.out.println("Sergio");
+        
         int idUsuario = 0;
 
         if (idUsu == null) {

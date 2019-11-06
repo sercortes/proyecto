@@ -77,7 +77,6 @@ public class admin extends HttpServlet {
 
     public static void showError(HttpServletRequest request, HttpServletResponse response, String error)
             throws ServletException, IOException {
-        System.out.println("Ups Error :D " + error);
         response.sendRedirect("/SavPro/Error");
     }
 
