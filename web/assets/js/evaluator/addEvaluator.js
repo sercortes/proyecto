@@ -78,6 +78,9 @@ function addFunction(ev){
                 }else{
                     alertify.error('Ups ocurrio un error')
                 }
+                $('#formulario')[0].reset()
+                $('#formulario').removeClass('was-validated')
+                 $('#tableChild').html('')
             }
         })
     }

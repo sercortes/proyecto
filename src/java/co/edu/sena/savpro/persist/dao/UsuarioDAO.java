@@ -238,8 +238,8 @@ public class UsuarioDAO implements InterfaceCRUD {
 
             PreparedStatement ps = conn.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getNombre());
-            ps.setString(2, user.getEmail());
-            ps.setString(3, user.getApellido());
+            ps.setString(2, user.getApellido());
+            ps.setString(3, user.getEmail());
             ps.setString(4, user.getPassword());
             ps.setInt(5, user.getPerfil());
             ps.setString(6, user.getEstado());

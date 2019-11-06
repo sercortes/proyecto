@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form onsubmit="addFunction()" class="needs-validation" novalidate>
+                    <form onsubmit="addFunction()" id="formulario" class="needs-validation" novalidate>
                         <div class="form-row">
 
                             <input id="idProyecto" name="id" type="hidden" value="${PROYECTO.idProyecto}" class="form-control" required>
