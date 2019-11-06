@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.38-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: savpro
 -- ------------------------------------------------------
--- Server version	5.5.5-10.3.16-MariaDB
+-- Server version	10.3.16-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,33 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `EmpresaUsuario`
+--
+
+DROP TABLE IF EXISTS `EmpresaUsuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EmpresaUsuario` (
+  `codEmpresa` int(11) NOT NULL,
+  `codUsuario` int(11) NOT NULL,
+  KEY `codEmpresa` (`codEmpresa`),
+  KEY `codUsuario` (`codUsuario`),
+  CONSTRAINT `codEmpresa` FOREIGN KEY (`codEmpresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `codUsuario` FOREIGN KEY (`codUsuario`) REFERENCES `Usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `EmpresaUsuario`
+--
+
+LOCK TABLES `EmpresaUsuario` WRITE;
+/*!40000 ALTER TABLE `EmpresaUsuario` DISABLE KEYS */;
+INSERT INTO `EmpresaUsuario` VALUES (26,179),(29,179),(29,181),(26,180),(26,183),(29,184),(29,185),(29,186),(26,189);
+/*!40000 ALTER TABLE `EmpresaUsuario` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `TipoEvaluador`
@@ -49,15 +76,18 @@ DROP TABLE IF EXISTS `Usuario`;
 CREATE TABLE `Usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `username` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL,
   `perfil` int(11) NOT NULL,
   `estatus` varchar(20) NOT NULL,
+  `TipoEvaluador` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `perfil` (`perfil`),
+  KEY `FKTipoEva` (`TipoEvaluador`),
+  CONSTRAINT `FKTipoEva` FOREIGN KEY (`TipoEvaluador`) REFERENCES `TipoEvaluador` (`idTipoEvaluador`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKUsuario` FOREIGN KEY (`perfil`) REFERENCES `perfil` (`idPerfil`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +96,7 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` VALUES (1,'ssergio','sergio@misena.edu.co','admin','21232f297a57a5a743894a0e4a801fc3',1,'ok'),(2,'andrea','andrea@misena.edu.co','users','ee11cbb19052e40b07aac0ca060c23ee',2,'ok'),(3,'ximena','ximena@misena.edu.co','jimena','ce127552d8bef2d3f15be385cd3363b3',2,'ok'),(60,'Miguel','sdcortes6@misena.edu.co','Miguel','0eb18d20d6fb90cb6ba1810c5f266d2a',3,'ok');
+INSERT INTO `Usuario` VALUES (63,'sergio','cortes','sdcortes6@misena.edu.co','81dc9bdb52d04dc20036dbd8313ed055',1,'ok',NULL),(179,'edith','zambrano','edith@gmail.com','bface9aa8e675d3a1757f143893793db',2,'ok',NULL),(180,'raul','mercado','raul@gmail.com','bc7a844476607e1a59d8eb1b1f311830',3,'ok',NULL),(181,'pepe','raul','pepe@gmail.com','926e27eecdbc7a18858b3798ba99bddd',3,'ok',NULL),(183,'joselito','bermudez','jose@gmail.com','662eaa47199461d01a623884080934ab',3,'ok',NULL),(184,'popo','dd','alexgamez8734@gmail.com','00825584fcc3b1359dbaf7c1dd3bb0da',3,'activo',NULL),(185,'sergio','jj','sdcortes6@misena.edu.co','5abce9766ac2a19d445cf5b86d06e5b6',3,'activo',NULL),(186,'alex','gamez','cortesgonzalez9@gmail.com','5ec109159a41a1971eebe8bcb48eed14',3,'activo',NULL),(187,'eduar','enowden','cortesgonzalez9@gmail.com','1234',3,'ok',NULL),(189,'laura','molano','laura@gmail.com','680e89809965ec41e64dc7e447f175ab',3,'ok',NULL);
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +117,7 @@ CREATE TABLE `actividad_formacion` (
   PRIMARY KEY (`id`),
   KEY `FKProyecto` (`proyecto_id`),
   CONSTRAINT `FKProyecto` FOREIGN KEY (`proyecto_id`) REFERENCES `proyecto` (`idProyecto`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +126,7 @@ CREATE TABLE `actividad_formacion` (
 
 LOCK TABLES `actividad_formacion` WRITE;
 /*!40000 ALTER TABLE `actividad_formacion` DISABLE KEYS */;
-INSERT INTO `actividad_formacion` VALUES (16,'introduccion a las redes','2019-08-17','2019-09-14',2,11),(53,'Inteligencia artificial','2019-08-01','2019-09-19',4,8),(54,'Linux','2019-08-01','2019-08-31',4,8),(55,'Linux','2019-08-01','2019-08-30',5,8),(56,'Linux','2019-08-01','2019-08-30',4,23);
+INSERT INTO `actividad_formacion` VALUES (57,'Introducción a redes','2019-10-01','2019-10-30',3,44),(59,'Medio ambiente','2019-11-01','2019-11-30',4,44),(60,'porno','2019-11-16','2019-11-07',4,44),(61,'ss','2019-11-01','2019-11-30',4,44),(62,'Mantenimiento de redes','2019-12-01','2019-12-30',2,44),(63,'Mantenimiento de celulares','2019-11-08','2019-11-23',45,44),(64,'Introducción a las computadoras','2019-11-08','2019-11-07',4,44),(65,'s','2019-11-01','2019-11-22',3,44),(66,'s','2019-11-07','2019-11-14',3,44),(67,'s','2019-11-22','2019-11-19',3,44),(68,'s','2019-11-03','2019-11-08',3,44),(69,'c','2019-11-01','2019-11-15',3,44),(70,'s','2019-11-01','2019-11-13',3,44),(71,'s','2019-11-15','2019-11-13',4,44),(72,'s','2019-11-07','2019-11-21',3,44),(73,'s','2019-11-09','2019-11-15',2,44),(74,'s','2019-11-15','2019-11-21',2,44),(75,'a','2019-11-07','2019-11-06',2,44),(76,'s','2019-11-14','2019-11-14',2,44),(77,'ss','2019-11-01','2019-11-22',3,44),(78,'s','2019-11-15','2019-11-14',3,44);
 /*!40000 ALTER TABLE `actividad_formacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,9 +144,9 @@ CREATE TABLE `actividad_formacion_has_aprendiz` (
   `fecha_evaluacion` date DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   KEY `FKActividadFormacion` (`actividadFormacionId`),
-  KEY `FKEvaluador` (`EvaluadorId`),
+  KEY `FKUsuarioEvaluador` (`EvaluadorId`),
   CONSTRAINT `FKActividadFormacion` FOREIGN KEY (`actividadFormacionId`) REFERENCES `actividad_formacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FKEvaluador` FOREIGN KEY (`EvaluadorId`) REFERENCES `evaluador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FKUsuarioEvaluador` FOREIGN KEY (`EvaluadorId`) REFERENCES `Usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,7 +156,7 @@ CREATE TABLE `actividad_formacion_has_aprendiz` (
 
 LOCK TABLES `actividad_formacion_has_aprendiz` WRITE;
 /*!40000 ALTER TABLE `actividad_formacion_has_aprendiz` DISABLE KEYS */;
-INSERT INTO `actividad_formacion_has_aprendiz` VALUES (56,12,'50','2019-09-24','Muy bueno');
+INSERT INTO `actividad_formacion_has_aprendiz` VALUES (57,181,'34','2019-11-03','muy bueno'),(57,180,'80','2019-10-22','malop'),(59,185,NULL,NULL,NULL),(59,184,NULL,NULL,NULL),(60,185,NULL,NULL,NULL),(60,184,NULL,NULL,NULL),(61,185,NULL,NULL,NULL),(61,184,NULL,NULL,NULL),(62,185,NULL,NULL,NULL),(62,184,NULL,NULL,NULL),(63,185,NULL,NULL,NULL),(63,184,NULL,NULL,NULL),(64,186,NULL,NULL,NULL),(64,185,NULL,NULL,NULL),(65,186,NULL,NULL,NULL),(65,185,NULL,NULL,NULL),(66,186,NULL,NULL,NULL),(66,185,NULL,NULL,NULL),(67,185,NULL,NULL,NULL),(67,186,NULL,NULL,NULL),(68,185,NULL,NULL,NULL),(68,186,NULL,NULL,NULL),(68,184,NULL,NULL,NULL),(69,186,NULL,NULL,NULL),(69,185,NULL,NULL,NULL),(69,184,NULL,NULL,NULL),(70,185,NULL,NULL,NULL),(70,184,NULL,NULL,NULL),(70,186,NULL,NULL,NULL),(71,185,NULL,NULL,NULL),(71,186,NULL,NULL,NULL),(72,186,NULL,NULL,NULL),(72,185,NULL,NULL,NULL),(72,184,NULL,NULL,NULL),(73,186,NULL,NULL,NULL),(73,185,NULL,NULL,NULL),(73,184,NULL,NULL,NULL),(74,186,NULL,NULL,NULL),(74,185,NULL,NULL,NULL),(74,184,NULL,NULL,NULL),(75,186,NULL,NULL,NULL),(75,185,NULL,NULL,NULL),(76,186,NULL,NULL,NULL),(76,185,NULL,NULL,NULL),(77,186,NULL,NULL,NULL),(77,185,NULL,NULL,NULL),(78,186,NULL,NULL,NULL),(78,185,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `actividad_formacion_has_aprendiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,15 +227,12 @@ CREATE TABLE `empresa` (
   `idtamano` int(11) NOT NULL,
   `paginaWeb` varchar(255) NOT NULL,
   `nombreEmpresa` varchar(255) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKTamano` (`idtamano`),
-  KEY `FKUsuario1` (`idUsuario`),
   KEY `FKtipo` (`idtipo_Entidad`),
   CONSTRAINT `FKTamano` FOREIGN KEY (`idtamano`) REFERENCES `tamano` (`idtamano`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FKUsuario1` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKtipo` FOREIGN KEY (`idtipo_Entidad`) REFERENCES `tipo_Entidad` (`idtipo_Entidad`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,41 +241,8 @@ CREATE TABLE `empresa` (
 
 LOCK TABLES `empresa` WRITE;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-INSERT INTO `empresa` VALUES (3,'wester.co','345-4562-23','calle 45 #55-2 barrio las flores','2343456','Comercial','Empresa dedicada a la elaboraciÃ³n de articulos comestibles como empanadas u otros su principal producto son las hamburguesas gigantes',1,2,'www.wester.com.co','wester',2),(4,'sintec.co','9967894-1233','kra 8 # 34-45 san miguel','2346593','Comercial','Empresas dedicada a la ventas de equipos infomaticos para ambientes educativos',1,1,'www.sintec.com.co','Sintec',3),(5,'super.co','4545-235788-455','Calle 17 D No.116-15','456-45-67','Comercial','1961 nace la empresa, Productos Ricos Ltda. Comienza la consolidaciÃ³n de la imagen de marca.\r\nInicia la producciÃ³n de papas. En una pequeÃ±a planta en el barrio Rionegro de la ciudad de BogotÃ¡, se desarrolla el proceso de las papas de manera semi-industrial.\r\n1967 La sociedad Productos Ricos Ltda, cambia su razÃ³n social, a Comestibles Ricos Ltda.',1,1,'https://www.superricas.com/conocenos','Super ricas',3),(6,'alpinas','56562-56567RRRR','Km 3, via briceño sopo','34653423','Comercio','Empresa deidca a la ventas de producto nutritivos a base de lacteos',1,1,'https://www.alpina.com/','Alpinás',2);
+INSERT INTO `empresa` VALUES (26,'Nodext','23-355R-4556532','calle 34 # 7-56','234-65-76','Textil','Las telas inteligentes son una de las tendencias más prometedoras para el 2018, es decir, textiles con filtro UV, antibacteriales, biodegradables, repelentes, con adaptaciones especiales a las condiciones y cambios medio ambientales. Esta clase de telas se podrán apreciar en todo tipo de estilos, ya sean casuales, formales, deportivos o incluso para las prendas de control.\r\n\r\nLa industria textil muestra un panorama alentador para este 2018, es así como el presidente de Inexmoda, Carlos Eduardo Botero, señaló luego de culminar la Feria Colombiatex de las Américas, el pasado 25 de enero, que se ha presentado un ambiente de optimismo entre los empresarios, quienes ven grandes posibilidades de aumentar su competitividad, producción y rentabilidad. ',2,1,'www.nodext.co','nodext'),(29,'jdkasjdkjasd','kdsjdkj','kdjskdj','kjdskajd','jdksajdk','kjdskajdk',1,2,'jdkasjdkajsdk','Sonmmer');
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `evaluador`
---
-
-DROP TABLE IF EXISTS `evaluador`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `evaluador` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) NOT NULL,
-  `apellidos` varchar(255) NOT NULL,
-  `programa_formacion` varchar(255) NOT NULL,
-  `CorreoEvaluador` varchar(255) NOT NULL,
-  `CodTipo` int(11) NOT NULL,
-  `codUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKTipoEvaluador` (`CodTipo`),
-  KEY `FKUsuarioEvaluador` (`codUsuario`),
-  CONSTRAINT `FKTipoEvaluador` FOREIGN KEY (`CodTipo`) REFERENCES `TipoEvaluador` (`idTipoEvaluador`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FKUsuarioEvaluador` FOREIGN KEY (`codUsuario`) REFERENCES `Usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `evaluador`
---
-
-LOCK TABLES `evaluador` WRITE;
-/*!40000 ALTER TABLE `evaluador` DISABLE KEYS */;
-INSERT INTO `evaluador` VALUES (12,'Miguel','cervantez','ADSI','sdcortes6@misena.edu.co',2,60);
-/*!40000 ALTER TABLE `evaluador` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -357,7 +351,7 @@ CREATE TABLE `proyecto` (
   KEY `FKInterventor` (`interventor_id`),
   CONSTRAINT `FKEmpresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKInterventor` FOREIGN KEY (`interventor_id`) REFERENCES `interventor` (`idInterventor`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +360,7 @@ CREATE TABLE `proyecto` (
 
 LOCK TABLES `proyecto` WRITE;
 /*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
-INSERT INTO `proyecto` VALUES (8,'Simplex','26%',3,3,'Proyecto enfocado en solucionar la problematica de las basuras y con ellas generar nuevos producto a base de economio circular','Implementar estrategias que permitan reutilizar desechos y reducir la contaminacion '),(11,'Curso CISCO','25%',4,4,'Ofrece una educacion y capacitacion tecnica con referente a la gestion y seguridad de redes, y se vincula a orientar a miles de personas la plataforma para brindar soporte profesional.','Informar respecto a la seguridad de redes y su importancia.\r\n\r\nUtilizar herramientas para aumento del conocimiento en cableado estructurado'),(23,'Full era','50%',6,3,'Proyecto dedicado para establecer conevios','Implementar estrategias que fomentes la ventas en el municipio');
+INSERT INTO `proyecto` VALUES (44,'new tech','34%',26,3,'Proyecto dedicado a la','Implementar TICs en la juventud'),(46,'calvo brazers','lkdjsalkdj',29,4,'Las telas inteligentes son una de las tendencias más prometedoras para el 2018, es decir, textiles con filtro UV, antibacteriales, biodegradables, repelentes, con adaptaciones especiales a las condiciones y cambios medio ambientales. Esta clase de telas se podrán apreciar en todo tipo de estilos, ya sean casuales, formales, deportivos o incluso para las prendas de control.\r\n\r\nLa industria textil muestra un panorama alentador para este 2018, es así como el presidente de Inexmoda, Carlos Eduardo Botero, señaló luego de culminar la Feria Colombiatex de las Américas, el pasado 25 de enero, que se ha presentado un ambiente de optimismo entre los empresarios, quienes ven grandes posibilidades de aumentar su competitividad, producción y rentabilidad. ','asdfasd');
 /*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,7 +399,7 @@ CREATE TABLE `tipo_Entidad` (
   `idtipo_Entidad` int(11) NOT NULL AUTO_INCREMENT,
   `nombreEntidad` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idtipo_Entidad`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,7 +408,7 @@ CREATE TABLE `tipo_Entidad` (
 
 LOCK TABLES `tipo_Entidad` WRITE;
 /*!40000 ALTER TABLE `tipo_Entidad` DISABLE KEYS */;
-INSERT INTO `tipo_Entidad` VALUES (1,'privada'),(2,'publica');
+INSERT INTO `tipo_Entidad` VALUES (1,'publica'),(2,'privada');
 /*!40000 ALTER TABLE `tipo_Entidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,4 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-05  8:26:57
+-- Dump completed on 2019-11-06  8:25:12

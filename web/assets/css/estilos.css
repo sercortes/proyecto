@@ -39,3 +39,20 @@ background: linear-gradient(to right, #556270, #4ECDC4); /* W3C, IE 10+/ Edge, F
 select {
     -webkit-appearance: none;
 }
+
+
+@media screen and (max-width: 767px) {   
+    #imagen{
+    	content: url('../img/logo/logoShort.png');
+    } 
+}
+
+@media screen and (min-width: 768px) {      
+    #imagen{      
+    	content: url('../img/logo/logo3.png');
+    } 
+} 
+
+.imagen1{      
+        content: url('../img/logo/logoShort.png');
+    } 
