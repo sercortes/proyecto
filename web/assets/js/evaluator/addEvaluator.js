@@ -79,7 +79,13 @@ function addFunction(ev){
             }, error: function (error){
                  
                  $('#contenido').html('');
-                
+                 $('#mensaje').append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Ok!</strong> Operaciones realizadas con éxito.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>`)
+
                 if(error.statusText === "OK"){
                     alertify.success('Operación realizada')
                 }else{
@@ -88,6 +94,7 @@ function addFunction(ev){
                 $('#formulario')[0].reset()
                 $('#formulario').removeClass('was-validated')
                  $('#tableChild').html('')
+                 $('#addEvaluador').hide();
             }
         })
     }

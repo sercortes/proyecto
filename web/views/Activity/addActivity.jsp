@@ -127,7 +127,9 @@
                         
                     </form>
 
-                            
+                            <div id="mensaje">
+                                
+                            </div>
                             
 
                 </div>
