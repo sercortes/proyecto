@@ -17,20 +17,17 @@ $(document).ready(function(){
     
     
     $('.boton1').click(function (){
+       
         ocultar()
+         
     })
     
     function ocultar(){
         if (estado) {
-           // $('#imagen').show()
-           document.getElementById('imagen').src='assets/img/logo/logoShort.png'
-           // $('#imagen').src='pic_bulboff.gif'
+            $('#imagen').show()
             estado = false
         }else{
-          //  $('#imagen').hide()
-         // document.getElementById('imagen').src='assets/img/logo/logo3.png'
-           // $('#imagen').src='pic_bulboff.gif'
-            $('#imagen').addClass("imagen1");
+            $('#imagen').hide()
             estado = true
         }
     }

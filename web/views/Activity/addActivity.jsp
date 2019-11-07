@@ -110,22 +110,30 @@
                                         
                                     </tbody>
                                 </table>
+                                
+                               
+                                
                             </div>
 
                         </div>
 
-
-
-                        <div class="dropdown-divider"></div>
-
+                            
 
                         <button class="btn btn-success float-right" type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
 
+                           <div id="contenido" class="float-right">
+                                    
+                                </div>
+                        
                     </form>
 
-
+                            
+                            
 
                 </div>
+                            
+                            
+
 
                 <div class="col-lg-12 mb-4">
                     <a href="/SavPro/Activitys?id=${PROYECTO.idProyecto}" class="btn btn-primary m-4">

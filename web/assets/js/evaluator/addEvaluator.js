@@ -65,6 +65,10 @@ function addFunction(ev){
             'arrayEvaluadores' : JSON.stringify(arrayEvaluadores)
         }
         
+        $('#contenido').append(`
+                                        <img src="assets/img/cargar/loader.gif"/>
+                                        Un momento, por favor...`);
+        
         $.ajax({
             type: 'POST',
             url: './NewActivity',
@@ -73,6 +77,9 @@ function addFunction(ev){
             success: function (datas){
                 console.log(datas)
             }, error: function (error){
+                 
+                 $('#contenido').html('');
+                
                 if(error.statusText === "OK"){
                     alertify.success('Operación realizada')
                 }else{
