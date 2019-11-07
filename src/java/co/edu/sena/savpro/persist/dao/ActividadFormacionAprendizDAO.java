@@ -95,9 +95,9 @@ public class ActividadFormacionAprendizDAO implements InterfaceCRUD {
     public ArrayList<?> getSomeByID(String id) {
         try {
             String sql = "SELECT * FROM actividad_formacion_has_aprendiz afa"
-                    + "	INNER JOIN evaluador e ON afa.EvaluadorId = e.id"
+                    + "	INNER JOIN Usuario u ON afa.EvaluadorId = u.id"
                     + " INNER JOIN actividad_formacion a ON afa.actividadFormacionId = a.id"
-                    + " WHERE e.codUsuario = ? AND date(a.fecha_fin) <= now()";
+                    + " WHERE u.id = ? AND date(a.fecha_fin) <= now()";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();

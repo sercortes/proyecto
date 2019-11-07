@@ -95,6 +95,6 @@
 
 </div>
 
-<script src="assets/js/validation.js"></script>
+<script src="assets/js/validation_1.js"></script>
 
 <%@include file="/views/template/footer.jspf"%>  

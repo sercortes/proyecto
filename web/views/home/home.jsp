@@ -26,7 +26,7 @@
                     <p>Bienvenido ${USER.nombre}</p>
                     <c:choose>
 
-                        <c:when test="${USER.perfil == 3 && USER.estado == 'no'}">
+                        <c:when test="${USER.perfil == 3}">
 
                             <p class="font-weight-bold">Por favor califica las actividades  de formación para que puedas certificarte</p>
                             <a href="/SavPro/ActivityAprendiz?id=${USER.idUsuario}" class="btn btn-danger" role="button">

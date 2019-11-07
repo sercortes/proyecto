@@ -15,10 +15,10 @@ $(document).ready(function () {
 
         if (exist === undefined) {
             arrayEvaluadores.push(
-                {
-                    'id': idEvaluador,
-                    'nombre': nameEvaluador
-                }
+                    {
+                        'id': idEvaluador,
+                        'nombre': nameEvaluador
+                    }
             )
 
             $('#tableChild').append(`<tr>
@@ -45,7 +45,7 @@ $(document).ready(function () {
 
 })
 
-function addFunction(ev){
+function addFunction(ev) {
     let name = $('#nombre').val()
     let sesiones = $('#sesiones').val()
     let fechaInicio = $('#fechaInicio').val()
@@ -54,65 +54,71 @@ function addFunction(ev){
     if (name == "" || sesiones == "" ||
             fechaInicio == "" || fechaFin == "" || arrayEvaluadores.length === 0) {
         alertify.alert('Complete el formulario, por favor')
-    }else{
-        
+    } else {
+
         let data = {
-            'id':id,
+            'id': id,
             'nombre': name,
             'sesiones': sesiones,
             'fechaInicio': fechaInicio,
-            'fechaFin' : fechaFin,
-            'arrayEvaluadores' : JSON.stringify(arrayEvaluadores)
+            'fechaFin': fechaFin,
+            'arrayEvaluadores': JSON.stringify(arrayEvaluadores)
         }
-        
+
         $('#contenido').append(`
                                         <img src="assets/img/cargar/loader.gif"/>
                                         Un momento, por favor...`);
-        
+
         $.ajax({
             type: 'POST',
             url: './NewActivity',
             dataType: "json",
             data,
-            success: function (datas){
+            success: function (datas) {
                 console.log(datas)
-            }, error: function (error){
-                 
-                 $('#contenido').html('');
-                 $('#mensaje').append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Ok!</strong> Operaciones realizadas con éxito.
+            }, error: function (error) {
+
+                $('#contenido').html('');
+                let texto = ''
+
+
+                if (error.statusText === "OK") {
+                    alertify.success('Operación realizada')
+                    texto = 'Operaciones realizadas con éxito'
+                } else {
+                    alertify.error('Ups ocurrio un error')
+                    texto = 'Ups ocurrio un error'
+                }
+
+                $('#mensaje').append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Ok!</strong> ${texto}.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>`)
 
-                if(error.statusText === "OK"){
-                    alertify.success('Operación realizada')
-                }else{
-                    alertify.error('Ups ocurrio un error')
-                }
                 $('#formulario')[0].reset()
                 $('#formulario').removeClass('was-validated')
-                 $('#tableChild').html('')
-                 $('#addEvaluador').hide();
+                $('#tableChild').html('')
+                $('#addEvaluador').hide();
             }
         })
     }
-    
+
 }
 
-function eliminar(idEvaluador){
+function eliminar(idEvaluador) {
     let exist = arrayEvaluadores.find(element => {
-            return idEvaluador === element.id
-        })
-        
-        index = arrayEvaluadores.indexOf(exist)
-        arrayEvaluadores.splice(index, 1)
-        
-        $('#tableChild').html('')
-        
-        for(var item of arrayEvaluadores){
-            $('#tableChild').append(`<tr>
+        return idEvaluador === element.id
+    })
+
+    index = arrayEvaluadores.indexOf(exist)
+    arrayEvaluadores.splice(index, 1)
+
+    $('#tableChild').html('')
+
+    for (var item of arrayEvaluadores) {
+        $('#tableChild').append(`<tr>
                                             <td>${item.nombre}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-xs" role="button" title="Eliminar"  onclick = "eliminar(${item.id})" >
@@ -120,6 +126,6 @@ function eliminar(idEvaluador){
                                                 </button>   
                                             </td>
                                         </tr>`);
-        }
-    
+    }
+
 }
