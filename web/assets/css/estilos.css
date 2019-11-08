@@ -40,19 +40,3 @@ select {
     -webkit-appearance: none;
 }
 
-
-@media screen and (max-width: 767px) {   
-    #imagen{
-    	content: url('../img/logo/logoShort.png');
-    } 
-}
-
-@media screen and (min-width: 768px) {      
-    #imagen{      
-    	content: url('../img/logo/logo3.png');
-    } 
-} 
-
-.imagen1{      
-        content: url('../img/logo/logoShort.png');
-    } 

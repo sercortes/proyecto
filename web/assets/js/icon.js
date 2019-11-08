@@ -1,13 +1,12 @@
 
 
-// $(window).resize(function() {
-//    if ($(window).width() < 768) {
-//      $('#imagen').hide()
-//    }else{
-//       $('#imagen').show()
-//       .attr("src","http://dummyimage.com/250x155/")
-//    }
-//  });
+ $(window).resize(function() {
+    if ($(window).width() < 768) {
+            $('#imagen').attr('src', 'assets/img/logo/logoShort.png')
+    }else{
+         $('#imagen').attr('src', 'assets/img/logo/logo34.png')
+    }
+  });
 
 
 $(document).ready(function(){
@@ -24,10 +23,10 @@ $(document).ready(function(){
     
     function ocultar(){
         if (estado) {
-            $('#imagen').show()
+            $('#imagen').attr('src', 'assets/img/logo/logo34.png')
             estado = false
         }else{
-            $('#imagen').hide()
+            $('#imagen').attr('src', 'assets/img/logo/logoShort.png')
             estado = true
         }
     }
