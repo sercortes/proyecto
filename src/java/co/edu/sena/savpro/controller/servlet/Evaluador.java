@@ -56,19 +56,13 @@ public class Evaluador extends HttpServlet {
             admin.checkSession(request, response);
         } else {
             admin.setContentType(request);
-            HttpSession session = request.getSession();
             String direccion = request.getRequestURI();
             switch (direccion) {
                 case "/SavPro/Evaluatordetails":
 
-                    Usuario usuario = (Usuario) session.getAttribute("USER");
-
-                    if (usuario.getPerfil() == 1) {
+                 
                         evaluatorDetails(request, response);
-                    } else {
-                        response.sendRedirect("/SavPro/Home");
-                    }
-
+                   
                     break;
             }
         }
@@ -111,17 +105,15 @@ public class Evaluador extends HttpServlet {
 
         RequestDispatcher rd;
 
-        String id = request.getParameter("idEvaluador");
+        String id = request.getParameter("id");
 
         Conexion conn = new Conexion();
         EvaluadorDAO evaluadordao = new EvaluadorDAO(conn);
         Object eva = evaluadordao.getByID(id);
-
-        request.setAttribute("EVALUADOR", eva);
-
-        rd = request.getRequestDispatcher("/views/evaluador/seeEvaluador.jsp");
-        rd.forward(request, response);
-
+        
+      response.setContentType("application/json");
+      new Gson().toJson(eva, response.getWriter());
+      
     }
 
     @Override

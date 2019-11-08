@@ -96,7 +96,7 @@ public class EvaluadorDAO implements InterfaceCRUD {
     @Override
     public Object getByID(String id) {
 try {
-            String sql = "SELECT * FROM evaluador WHERE "
+            String sql = "SELECT * FROM Usuario WHERE "
                     + " id = ?";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setString(1, id);
@@ -107,11 +107,8 @@ try {
                 
                 evaluador.setId(rs.getInt("id"));
                 evaluador.setNombres(rs.getString("nombre"));
-                evaluador.setApellidos(rs.getString("apellidos"));
-                evaluador.setProgramaForma(rs.getString("programa_formacion"));
-                evaluador.setEmail(rs.getString("CorreoEvaluador"));
-                evaluador.setCodTipo(rs.getInt("CodTipo"));
-                evaluador.setCodUsuario(rs.getInt("codUsuario"));
+                evaluador.setApellidos(rs.getString("apellido"));
+                evaluador.setEmail(rs.getString("email"));
                 
             }
             return evaluador;

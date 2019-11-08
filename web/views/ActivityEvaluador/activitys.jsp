@@ -62,11 +62,13 @@
                                         
 
                                         <td>
-                                            <form action="/SavPro/Evaluatordetails" method="POST">
-                                                <input type="hidden" name="idEvaluador" value="${actividades.evaluadorId}" />
-                                                <button class="btn btn-success" type="submit"><i class="far fa-eye"></i> Ver</button>
+                                                    
+                                                    <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter" onclick="detailsEvaluador(${actividades.evaluadorId})">
+ <i class="far fa-eye"></i>
+  Ver
+</button>
 
-                                            </form>
                                         </td>
 
 
@@ -106,7 +108,11 @@
 
 </div>
 
+
+
+<%@include file="/views/ActivityEvaluador/modal.jspf" %>
+
 <%@include file="/views/template/footer.jspf"%>  
 
-
+<script src="assets/js/evaluator/details.js"></script>
 
