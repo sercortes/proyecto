@@ -8,11 +8,11 @@
 <%@include file="/views/template/head.jspf"%>
 
 <body class="gradient">
-
+    <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="5s">
     <div class="container">
         <div class="container p-4">
             <div class="row">
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-5 mx-auto">
                     <div class="card text-center">
                         <div class="card-header">
                             <h3><i class="fas fa-sign-in-alt"></i> Ir a SavPro</h3>
@@ -72,6 +72,7 @@
             </div>
         </div>
     </div>
-
-</body><script src="assets/js/validation_1.js"></script>
+</div>
+</body>
+<script src="assets/js/validation_1.js"></script>
 

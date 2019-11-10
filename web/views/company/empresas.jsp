@@ -20,9 +20,17 @@
 
         <div class="col-lg-12 mb-4">
 
-            <c:if test="${USER.perfil == 1}">
                 <div>
-                    <form action="/SavPro/SearchCompany" method="POST" class="card card-sm needs-validation" novalidate>
+                   
+
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Empresas</h6>
+                    </div>
+                    <div class="card-body">
+
+                         <form action="/SavPro/SearchCompany" method="POST" class="card card-sm needs-validation" novalidate>
                         <div class="card-body row no-gutters align-items-center">
                             <input type="hidden" name="action" value="search" />
                             <!--end of col-->
@@ -44,16 +52,7 @@
                         </div>
                     </form>
 
-
-                </c:if>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Empresas</h6>
-                    </div>
-                    <div class="card-body">
-
-
-
+             <hr class="sidebar-divider">
 
                         <div class="col-auto">
                             <a href="/SavPro/AddCompany" class="btn btn-primary" role="button">

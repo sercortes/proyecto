@@ -16,7 +16,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-danger">Error 404 Recurso solicitado no existe</h6>
+                    <h6 class="m-0 font-weight-bold">Error 404 Recurso solicitado no existe</h6>
                 </div>
                 <img class="img-responsive" src="assets/img/jhon.gif" />
                 <div class="card-body">

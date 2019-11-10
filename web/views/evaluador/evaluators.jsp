@@ -36,15 +36,37 @@
                             <i class="fas fa-fw fa-plus"></i> Nuevo
                         </button>
                     </div>
-                    
+
                     <input id="idd" type="hidden" value="${ID}" maxlength="15">
 
                     <div class="dropdown-divider"></div>
 
 
                     <div id="tabla" class="table-responsive">
-                        
+
                     </div>
+
+
+
+
+<!--
+<table id="employee" class="table table-bordered table table-hover" cellspacing="0" width="100%">
+                    <colgroup><col><col><col></colgroup>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th >Salary</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody id="emp_body">
+                    </tbody>
+                </table>
+                <div id="pager">
+                    <ul id="pagination" class="pagination-sm"></ul>
+                </div>
+-->
+
 
 
 
@@ -69,7 +91,9 @@
 
 <script src="assets/js/evaluator/addAjax.js"></script>
 <script src="assets/js/evaluator/delUser.js"></script>
+<script src="assets/js/evaluator/pagination.js"></script>
 <script src="assets/js/validation.js"></script>
+<script src="assets/js/pagination/jquery.twbsPagination.min.js"></script>
 
 
 

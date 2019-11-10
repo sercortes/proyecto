@@ -17,7 +17,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-danger">Error 500 del Servidor</h6>
+                    <h6 class="m-0 font-weight-bold">Error 500 del Servidor</h6>
                 </div>
                 
                 <p class="text-center p-2">Sentimos las molestias, por favor intentalo nuevamente, si el error persiste contacta al administrador</p>

@@ -42,17 +42,20 @@
                 <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <a class="nav-link collapsed" href="./Companys">
                         <i class="fas fa-fw fa-building"></i>
                         <span>Empresas</span>
                     </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Opciones:</h6>
-                            <a class="collapse-item" href="/SavPro/Companys"><i class="fas fa-file-alt"></i> Empresas</a>
-                             <a class="collapse-item" href="/SavPro/Projects"><i class="fas fa-fw fa-building"></i> Proyectos</a>
-                        </div>
-                    </div>
+                    
+                </li>
+                    <hr class="sidebar-divider">
+                
+                
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="./Projects">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Proyectos</span>
+                    </a>
                     
                 </li>
               

@@ -4,6 +4,9 @@
     background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
     background-size: cover;
 }
+.orange{
+    color:#f1891b;
+}
 .bg-white {
     background-color: #2c4282!important;
 }
@@ -22,11 +25,11 @@
 .letrablanca{
 	color:#ffffff;	
 }
-.gradient{
-background: #4ECDC4;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #556270, #4ECDC4);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #556270, #4ECDC4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+.gradient {
+ background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), url(../img/Login/features-bg1.jpg);
+ 
+ background-size: cover;
+   
 }
 .barraderecha{
     border-right-style: solid !important;
