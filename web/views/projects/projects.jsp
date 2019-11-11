@@ -30,7 +30,7 @@
 
                     <div class="col-auto">
                     
-                        <a href="/SavPro/NewProject" class="btn btn-primary" role="button">
+                        <a href="/SavPro/NewProject" class="btn btn-success" role="button">
                        <i class="fas fa-fw fa-plus"></i> Nuevo</a>
                        
                     </div>
@@ -64,7 +64,7 @@
                                     <td>
 
                                         <a href="/SavPro/SeeProject?id=${proyectos.idProyecto}" class="btn btn-primary btn-xs" role="button"><i class="far fa-eye"></i></a>
-                                        <a href="/SavPro/edithProject?id=${proyectos.idProyecto}" class="btn btn-success btn-xs" role="button"><i class="far fa-edit"></i></a>  
+                                        <a href="/SavPro/edithProject?id=${proyectos.idProyecto}" class="btn btn-warning btn-xs" role="button"><i class="far fa-edit"></i></a>  
                                         <a href="/SavPro/DeleteProject?id=${proyectos.idProyecto}" class="btn btn-danger btn-xs" role="button" onclick="if (!(confirm('desea eliminar el proyecto')))
                                                     return false"><i class="far fa-trash-alt"></i> 
                                         </a> 

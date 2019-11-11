@@ -55,7 +55,7 @@
              <hr class="sidebar-divider">
 
                         <div class="col-auto">
-                            <a href="/SavPro/AddCompany" class="btn btn-primary" role="button">
+                            <a href="/SavPro/AddCompany" class="btn btn-success" role="button">
                                 <i class="fas fa-fw fa-plus"></i> Nuevo</a>
 
                         </div>

@@ -5,7 +5,7 @@ function eliminar(e){
                 function () {
                     
                     $.ajax({
-                        type: "GET",
+                        type: "get",
                         url: "./DelUser?id="+e,
                         dataType: "json",
                         success: function (data) {
@@ -23,7 +23,7 @@ function eliminar(e){
 
                 }, function () {
             alertify.error('Cancelado');
-        });
+        })
     
 }
 

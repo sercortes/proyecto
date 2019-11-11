@@ -222,14 +222,8 @@ public class Users extends HttpServlet {
     public void mostrarUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         RequestDispatcher dis = request.getRequestDispatcher("/views/users/Users.jsp");
-        
-        
-        dis.forward(request, response);
-      
-        
-        
-      
+         RequestDispatcher dis = request.getRequestDispatcher("/views/users/Users.jsp");   
+         dis.forward(request, response);
       
     }
     

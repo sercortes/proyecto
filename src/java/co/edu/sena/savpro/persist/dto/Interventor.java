@@ -20,6 +20,9 @@ public class Interventor {
     private String direccion;
     private String telefonoCelular;
     private int centro;
+    
+    private CargoInterventor cargoInterventor;
+    private CentroFormacion centroFormacion;
 
     public Interventor() {
     }
@@ -52,6 +55,24 @@ public class Interventor {
         this.centro = centro;
     }
 
+    public CargoInterventor getCargoInterventor() {
+        return cargoInterventor;
+    }
+
+    public void setCargoInterventor(CargoInterventor cargoInterventor) {
+        this.cargoInterventor = cargoInterventor;
+    }
+
+    public CentroFormacion getCentroFormacion() {
+        return centroFormacion;
+    }
+
+    public void setCentroFormacion(CentroFormacion centroFormacion) {
+        this.centroFormacion = centroFormacion;
+    }
+
+    
+    
     public int getIdInterventor() {
         return idInterventor;
     }

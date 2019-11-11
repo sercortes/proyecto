@@ -43,6 +43,10 @@
         <servlet-name>test</servlet-name>
         <servlet-class>co.edu.sena.savpro.controller.servlet.test</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>interventor</servlet-name>
+        <servlet-class>co.edu.sena.savpro.controller.servlet.interventor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Company</servlet-name>
         <url-pattern>/Companys</url-pattern>
@@ -127,6 +131,13 @@
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>interventor</servlet-name>
+        <url-pattern>/interventors</url-pattern>
+        <url-pattern>/listIntervertors</url-pattern>
+        <url-pattern>/searchInterventor</url-pattern>
+        <url-pattern>/deleteInterventor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

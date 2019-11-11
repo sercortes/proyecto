@@ -63,7 +63,7 @@ function listar() {
                                                     <td>${item.perfilUsuario.nombre}</td>
                                                     <td>${item.estado}</td>
                                                     <td>
-                                                        <button class="btn btn-success btn-xs" role="button" onclick = "editar(${item.idUsuario})">
+                                                        <button class="btn btn-warning btn-xs" role="button" onclick = "editar(${item.idUsuario})">
                                                             <i class="far fa-edit"></i>
                                                         </button>
                                                         

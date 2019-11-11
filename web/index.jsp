@@ -8,7 +8,7 @@
 <%@include file="/views/template/head.jspf"%>
 
 <body class="gradient">
-    <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="5s">
+    <div class="animated fadeInDown delay-1s">
     <div class="container">
         <div class="container p-4">
             <div class="row">
@@ -18,11 +18,15 @@
                             <h3><i class="fas fa-sign-in-alt"></i> Ir a SavPro</h3>
                         </div>
                         <div class="card-body">
-                            <img src="assets/img/Untitled.png" alt="" class="card-img-top mx-auto m-2 rounded-circle w-50">
+                            <img src="assets/img/Untitled.png" alt="" class="card-img-top mx-auto m-2 rounded-circle w-50 p-1">
                             <form action="/SavPro/Login" method="POST" class="needs-validation" novalidate>
 
                                 <div class="form-group">
+                                    <div class="input-group">
                                     <input name="user" type="email" class="form-control" id="validationCustom01" maxlength="100" placeholder="user@misena.edu.co" required autofocus="true">
+                                    <div class="input-group-append">
+                                       <button class="btn btn-primary" type="button" id="inputGroupFileAddon04"><i class="far fa-user"></i> </button>
+                                    </div>    
                                     <div class="valid-feedback">
                                         Ok
                                     </div>
@@ -30,15 +34,21 @@
                                         Ingrese un Correo válido
                                     </div>
                                 </div>
+                                </div>
 
                                 <div class="form-group">
+                                     <div class="input-group">
                                     <input name="pass" type="password" class="form-control" id="validationCustom02" maxlength="100" placeholder="**********" required>
+                                    <div class="input-group-append">
+                                       <button class="btn btn-primary" type="button" id="inputGroupFileAddon04"><i class="fas fa-key"></i> </button>
+                                    </div> 
                                     <div class="valid-feedback">
                                         Ok
                                     </div>
                                     <div class="invalid-feedback">
                                         Ingrese una contraseña válida
                                     </div>
+                                </div>
                                 </div>
 
 

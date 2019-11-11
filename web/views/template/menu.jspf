@@ -25,16 +25,10 @@
                   <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <a class="nav-link collapsed" href="./Users">
                         <i class="fas fa-users"></i>
                         <span>Usuarios</span>
                     </a>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Opciones:</h6>
-                            <a class="collapse-item" href="/SavPro/Users">Ver Usuarios</a>
-                        </div>
-                    </div>
                 </li>
                 </c:if>
                 
@@ -60,8 +54,20 @@
                 </li>
               
                 
+                <hr class="sidebar-divider">
+                
+                
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="./interventors">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Interventor</span>
+                    </a>
+                    
+                </li>
            
                   </c:if>
+                
+                
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
