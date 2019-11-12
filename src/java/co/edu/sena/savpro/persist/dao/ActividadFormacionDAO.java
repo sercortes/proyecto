@@ -91,7 +91,7 @@ public class ActividadFormacionDAO implements InterfaceCRUD{
     public List<ActividadesFormacion> getByID(int id){
         try{
             String sql = "SELECT * FROM actividad_formacion ac INNER JOIN proyecto p ON ac.proyecto_id=p.idProyecto\n" +
-                         "WHERE p.idProyecto = ?";
+                         "WHERE p.idProyecto = ? ORDER BY id DESC";
             PreparedStatement ps = conn.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

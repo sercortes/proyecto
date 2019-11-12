@@ -215,7 +215,7 @@ public class Activity extends HttpServlet {
             }
 
             String password = usuariodao.generatePassword();
-            Usuario user = new Usuario(item.getId(), item.getNombre(), password, "activo");
+            Usuario user = new Usuario(item.getId(), item.getNombre(), password, "calificado");
 
             if (!usuariodao.updateEvaluador(user)) {
                 bandera = false;

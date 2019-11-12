@@ -83,7 +83,7 @@
                                     <select name="evaluador" class="form-control" id="evaluador" tabindex="4" required>
                                         <option value="">No</option>
                                         <c:forEach items="${EVALUADORES}" var="evaluadores">
-                                            <option value="${evaluadores.idUsuario}">${evaluadores.nombre}</option>
+                                            <option value="${evaluadores.idUsuario}">${evaluadores.nombre} ${evaluadores.apellido}</option>
                                         </c:forEach>
                                     </select>
                                     <div class="input-group-append">
@@ -99,11 +99,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mb-3">
-                                <table class="table">
+                                <table class="table table-striped table-bordered">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Opciones</th>
+                                        <tr class="bg-primary letrablanca">
+                                            <th>Nombre</th>
+                                            <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableChild">

@@ -44,6 +44,14 @@
                 </li>
                     <hr class="sidebar-divider">
                 
+                     <li class="nav-item">
+                    <a class="nav-link collapsed" href="./interventors">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Interventor</span>
+                    </a>
+                    
+                </li>
+                <hr class="sidebar-divider">
                 
                  <li class="nav-item">
                     <a class="nav-link collapsed" href="./Projects">
@@ -54,16 +62,9 @@
                 </li>
               
                 
-                <hr class="sidebar-divider">
                 
                 
-                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="./interventors">
-                        <i class="fas fa-user-tie"></i>
-                        <span>Interventor</span>
-                    </a>
-                    
-                </li>
+                
            
                   </c:if>
                 

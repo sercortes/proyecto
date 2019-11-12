@@ -61,13 +61,13 @@
                                                 <td>${actividades.fechaFin}</td>
                                                 <td>${actividades.numeroSesiones}</td>
                                                 <td>
-                                                    <a href="/SavPro/GradeActivitys?id=${actividades.idActividad}" class="btn btn-success btn-xs" role="button">
+                                                    <a href="/SavPro/GradeActivitys?id=${actividades.idActividad}" class="btn btn-primary btn-xs" role="button">
                                                         <i class="far fa-eye"></i></a>
 
                                                 </td>
                                                
                                                 <td>
-                                                    <a href="/SavPro/EditActivity?id=${actividades.idActividad}" class="btn btn-success btn-xs" role="button"><i class="far fa-edit"></i></a>
+                                                    <a href="/SavPro/EditActivity?id=${actividades.idActividad}" class="btn btn-warning btn-xs" role="button"><i class="far fa-edit"></i></a>
                                                     
                                                     <a href="/SavPro/DelActivity?id=${actividades.idActividad}" class="btn btn-danger btn-xs" role="button" onclick="if (!(confirm('desea eliminar la actividad de formacion')))
                                                                 return false"><i class="fas fa-trash"></i></a>
