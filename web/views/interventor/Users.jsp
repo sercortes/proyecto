@@ -56,7 +56,7 @@
                     
                     
                     <div class="col-auto">
-                        <button id="boton" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button id="boton" type="button" class="btn btn-primary boton" data-toggle="modal" data-target="#exampleModalCenter">
                             <i class="fas fa-fw fa-plus"></i> Nuevo
                         </button>
                     </div>
@@ -116,8 +116,8 @@
 
 
 
-<%@include file="/views/users/modal.jspf" %>
-<%@include file="/views/users/modal1.jspf" %>
+<%@include file="/views/interventor/modal.jspf" %>
+<%@include file="/views/interventor/modal1.jspf" %>
 
 <%@include file="/views/template/footer.jspf"%>  
 

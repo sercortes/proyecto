@@ -32,7 +32,7 @@
                 <div class="card-body">
 
                     <div class="col-auto">
-                        <button id="boton" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button id="boton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                             <i class="fas fa-fw fa-plus"></i> Nuevo
                         </button>
                     </div>

@@ -14,6 +14,11 @@ public class CargoInterventor {
     private String id;
     private String nombre;
 
+    public CargoInterventor() {
+    }
+
+    
+    
     public CargoInterventor(String nombre) {
         this.nombre = nombre;
     }

@@ -30,7 +30,7 @@
 
                     <div class="col-auto">
                     
-                        <a href="/SavPro/NewProject" class="btn btn-success" role="button">
+                        <a href="/SavPro/NewProject" class="btn btn-primary" role="button">
                        <i class="fas fa-fw fa-plus"></i> Nuevo</a>
                        
                     </div>

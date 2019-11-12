@@ -5,6 +5,8 @@
  */
 package co.edu.sena.savpro.persist.dto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author smart
@@ -23,6 +25,9 @@ public class Interventor {
     
     private CargoInterventor cargoInterventor;
     private CentroFormacion centroFormacion;
+    
+    private ArrayList<CargoInterventor> listaCargo;
+    private ArrayList<CentroFormacion> listacentro;
 
     public Interventor() {
     }
@@ -149,5 +154,23 @@ public class Interventor {
     public String toString() {
         return "Interventor{" + "idInterventor=" + idInterventor + ", nombres=" + nombres + ", apellidos=" + apellidos + ", cargo=" + cargo + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", telefonoCelular=" + telefonoCelular + ", centro=" + centro + '}';
     }
+
+    public ArrayList<CargoInterventor> getListaCargo() {
+        return listaCargo;
+    }
+
+    public void setListaCargo(ArrayList<CargoInterventor> listaCargo) {
+        this.listaCargo = listaCargo;
+    }
+
+    public ArrayList<CentroFormacion> getListacentro() {
+        return listacentro;
+    }
+
+    public void setListacentro(ArrayList<CentroFormacion> listacentro) {
+        this.listacentro = listacentro;
+    }
+    
+    
     
 }

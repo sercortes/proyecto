@@ -138,6 +138,10 @@
         <url-pattern>/listIntervertors</url-pattern>
         <url-pattern>/searchInterventor</url-pattern>
         <url-pattern>/deleteInterventor</url-pattern>
+        <url-pattern>/formInterventor</url-pattern>
+        <url-pattern>/formEditInterventor</url-pattern>
+        <url-pattern>/updateInterventor</url-pattern>
+        <url-pattern>/addInterventor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

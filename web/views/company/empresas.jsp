@@ -55,7 +55,7 @@
              <hr class="sidebar-divider">
 
                         <div class="col-auto">
-                            <a href="/SavPro/AddCompany" class="btn btn-success" role="button">
+                            <a href="/SavPro/AddCompany" class="btn btn-primary" role="button">
                                 <i class="fas fa-fw fa-plus"></i> Nuevo</a>
 
                         </div>
@@ -100,7 +100,7 @@
 
                                                         <a href="/SavPro/Company?id=${empresas.idEmpresa}" class="btn btn-info btn-xs" role="button"><i class="far fa-eye"></i></a>
 
-                                                        <a href="/SavPro/EditCompany?id=${empresas.idEmpresa}" class="btn btn-success btn-xs" role="button"><i class="far fa-edit"></i></a>
+                                                        <a href="/SavPro/EditCompany?id=${empresas.idEmpresa}" class="btn btn-warning btn-xs" role="button"><i class="far fa-edit"></i></a>
 
                                                 
 

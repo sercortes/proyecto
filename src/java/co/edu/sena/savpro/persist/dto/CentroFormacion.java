@@ -14,6 +14,11 @@ public class CentroFormacion {
     private String id;
     private String nombre;
 
+    public CentroFormacion() {
+    }
+
+    
+    
     public CentroFormacion(String nombre) {
         this.nombre = nombre;
     }
