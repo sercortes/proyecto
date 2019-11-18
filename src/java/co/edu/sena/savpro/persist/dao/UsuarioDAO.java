@@ -267,7 +267,7 @@ public class UsuarioDAO implements InterfaceCRUD {
             boolean estado = rows > 0;
             return estado;
         } catch (Exception ex) {
-            ex.getMessage();
+            System.out.println(ex.getMessage());
             return false;
         }
     }
