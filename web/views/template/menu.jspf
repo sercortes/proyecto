@@ -1,4 +1,5 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
  <body id="page-top">
@@ -9,12 +10,12 @@
 
                 <div class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     <div class="sidebar-brand-icon">
-                        <img id="imagen" class="img-responsive" src="assets/img/logo/logo34.png">
+                        <img id="imagen" class="img-responsive" src="assets/img/logo/logo3.png">
                     </div>
                     
                 </div>
 
-
+  <hr class="sidebar-divider">
                 <li class="nav-item active">
                     <a class="nav-link" href="/SavPro/Home">
                         <i class="fas fa-fw fa-home"></i>
@@ -90,19 +91,53 @@
                             <i class="fa fa-bars"></i>
                         </button>
 
+                     
+                        
+                        
                         <ul class="navbar-nav ml-auto">
+                            
+                             <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-database fa-2x"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Notificaciones
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                
+                      <%
+         Date date = new Date();
+      %>
+                    <div class="small text-gray-500"><%=date.toString()%></div>
+                    <span class="font-weight-bold">Proyectos registrados</span>
+                  </div>
+                </a>
+              
+              
+                <a class="dropdown-item text-center small text-gray-500" href="#">Ver todas</a>
+              </div>
+            </li>
 
-                            <div class="topbar-divider d-none d-sm-block"></div>
 
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline small letrablanca"> ${USER.nombre}</span>
-                                    <i class="fas fa-user-circle"></i>
+                                    <i class="fas fa-user-circle fa-2x"></i>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400 fa-lg"></i>
                                         ${USER.nombre}
                                     </a>
                                     <div class="dropdown-divider"></div>

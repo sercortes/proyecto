@@ -85,7 +85,7 @@ public class ActividadFormacionDAO implements InterfaceCRUD{
             System.out.println(ex.getMessage());
             this.error = ex.getMessage();
             return 0;
-        }
+                }
     }
     
     public List<ActividadesFormacion> getByID(int id){

@@ -52,16 +52,12 @@
 
                         </div>
                     </form>
-                         <hr class="sidebar-divider">
                     
-                    
-                    <div class="col-auto">
+                    <div class="col-auto  float-right pb-3 pt-3">
                         <button id="boton" type="button" class="btn btn-primary boton" data-toggle="modal" data-target="#exampleModalCenter">
                             <i class="fas fa-fw fa-plus"></i> Nuevo
                         </button>
                     </div>
-
-                    <div class="dropdown-divider"></div>
 
 
                     <table id="examples" class="table table-striped table-bordered table-responsive">

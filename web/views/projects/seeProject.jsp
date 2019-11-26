@@ -25,7 +25,7 @@
                     <p class="card-text">${PROYECTO.empresa.nombreEmpresa}</p>
                     <p class="card-text">${PROYECTO.interventor.nombres}</p>
                     
-                    <a href="/SavPro/Projects" class="btn btn-primary m-4"><i class="fas fa-file-alt"></i> Ver otros proyectos</a>
+                    <a href="/SavPro/Projects" class="btn btn-primary m-4  float-right"><i class="fas fa-file-alt"></i> Ver otros proyectos</a>
                 </div>
             </div>
         </div>

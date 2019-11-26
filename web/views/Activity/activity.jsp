@@ -28,10 +28,10 @@
 
 
 
-                    <div class="col-auto">
+                    <div class="col-auto float-right pb-3">
+                        <a href="/SavPro/SeeProject?id=${PROYECTO.idProyecto}" class="btn btn-info btn-xs" role="button">Ver Proyecto <i class="fas fa-file-alt"></i></a>
                         <a href="/SavPro/AddActivity?id=${PROYECTO.idProyecto}" class="btn btn-primary" role="button">
                             <i class="fas fa-fw fa-plus"></i> Nueva</a>
-                        <a href="/SavPro/SeeProject?id=${PROYECTO.idProyecto}" class="btn btn-info btn-xs" role="button">Ver Proyecto <i class="fas fa-file-alt"></i></a>
                     </div>
                     <br>
 

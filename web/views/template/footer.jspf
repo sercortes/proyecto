@@ -1,10 +1,10 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
    </div>
-   <footer class="sticky-footer bg-white">
+   <footer class="sticky-footer footers">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span class="letrablanca">Sergio Cortes <sup>R</sup></span>
+                            <span class="">Sergio Cortes <sup>R</sup></span>
                         </div>
                     </div>
                 </footer>

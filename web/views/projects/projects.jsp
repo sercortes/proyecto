@@ -28,7 +28,7 @@
 
 
 
-                    <div class="col-auto">
+                    <div class="col-auto float-right pb-3">
                     
                         <a href="/SavPro/NewProject" class="btn btn-primary" role="button">
                        <i class="fas fa-fw fa-plus"></i> Nuevo</a>
