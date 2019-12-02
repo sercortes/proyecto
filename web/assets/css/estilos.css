@@ -4,17 +4,31 @@
     background-color: #02a7bd;
     border-color: #02a7bd;
 }
+.nav-link:focus, .nav-link:hover, .nav-link:active {
+    background-color: #008fa4;
+    text-decoration: none;
+    border-radius: 15px;
+}
+
+.colorOne{
+    color:#917d70;
+}
+
 .orange{
     background-color: #f1891b;
     color:#ffffff;
+}
+.orange1{
+    background-color: #fff;
+    color:#f1891b;
     
 }
 .footers{
-    background-color: #7a7e88!important;
-    color:#ffffff;
+    background-color: #ffffff!important;
+    color:#d1d3e2;
 }
 .bg-white {
-    background-color: #7a7e88!important;
+    background-color: #ffffff!important;
     
 /*    border-bottom-style: solid !important;
     border-bottom-width: 1px !important;
@@ -44,7 +58,7 @@
 }
 .barraderecha{
         
-    background-color:#5f7fdc;
+    background-color:#d4cec7;
 }
 #addEvaluador {
 	display: none;

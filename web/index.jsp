@@ -15,9 +15,9 @@
                 <div class="col-md-5 mx-auto">
                     <div class="card text-center">
                         <div class="card-header">
-                            <h3><i class="fas fa-sign-in-alt"></i> Ir a SavPro</h3>
+                            <h3 class="text-primary"><i class="fas fa-sign-in-alt text-primary"></i> SavPro</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-3">
                             <img src="assets/img/Untitled.png" alt="" class="card-img-top mx-auto m-2 rounded-circle w-50 p-1">
                             <form action="/SavPro/Login" method="POST" class="needs-validation" novalidate>
 
@@ -69,7 +69,7 @@
                                 
 
                                 <div class="form-group">
-                                    <button class="btn btn-success btn-block"><i class="fas fa-user-lock"></i> Entrar</button>
+                                    <button class="btn btn-success btn-block"><i class="fas fa-user-lock"></i> Ingresar</button>
                                 </div>
 
                             </form>
